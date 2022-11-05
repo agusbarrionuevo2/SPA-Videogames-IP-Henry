@@ -1,4 +1,0 @@
-//games
-https://api.rawg.io/api/games?key=319725fc41cb414bbe92f64a7a5836a5
-//genres
-https://api.rawg.io/api/genres?key=319725fc41cb414bbe92f64a7a5836a5
