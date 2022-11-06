@@ -14,18 +14,18 @@ videogamesRouter.get('/', async (req, res)=> {
 	}
 })
 
-videogamesRouter.get('/:id', async (req, res)=> {
+videogamesRouter.get('/:id', async (req, res) => {
+	const { id } = req.params
 	try {
-		const { id } = req.params
 		const videogameDetail = await getVideogameDetail(id)
 		return res.status(200).send(videogameDetail)
 	} catch (error) {
-		return res.status(404).send(error.message)
+		return res.status(404).send(`No existe un videojuego con el id: ${id}`)
 	}
 })
 
 videogamesRouter.post('/', async (req, res) => {
-
+	const {} = req.body
 })
 
 // Configurar los routers
