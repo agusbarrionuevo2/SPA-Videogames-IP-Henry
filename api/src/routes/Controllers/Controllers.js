@@ -3,10 +3,11 @@ const {
 	API_KEY
   } = process.env;
 const axios = require('axios');
+const {Op, Genre, Videogame} = require('../../db')
 
 
 
-//Busca todos los generos de la API ---------------------------------------------------
+//Busca todos los generos de la API y los guarda en la DB ---------------------------------------------------
 async function getAllGenres () {
 	let genres = []
 	const allGenres = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
@@ -14,11 +15,15 @@ async function getAllGenres () {
 			allGenres.results.forEach(g =>{
 				genres.push({
 					name: g.name,
-					games_count: g.games_count,
-					image: g.image_background
 				})
 			})
-	return genres
+	 genres.forEach(g => {
+		 Genre.findOrCreate({
+			where: {
+				name: g.name
+			}
+		})
+	})
 }
 
 //Busca los videojuegos de la API y busca los videojuegos de la api que coincidan con el nombre que recibe por parametro --------
@@ -54,7 +59,7 @@ async function getVideogames (name) {
 	return result
 }
 
-//busca info un videojuego en especifico
+//Busca info un videojuego en especifico ---------------------------------------------------------------------------------------
 async function getVideogameDetail (id) {
 	const videogame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
 		.then(response => response.data)
@@ -70,8 +75,18 @@ async function getVideogameDetail (id) {
 	return videogameDetail
 }
 
+//Crea un videojuego ------------------------------------------------------------------------------------------------------
+async function createVideogame (name, description, release_date, rating) {
+	if(!name || !description || !release_date || !rating) throw new Error('Not enough information')
+
+}
+
+
+
+
 module.exports = {
 	getAllGenres,
 	getVideogames,
-	getVideogameDetail
+	getVideogameDetail,
+	createVideogame
 }

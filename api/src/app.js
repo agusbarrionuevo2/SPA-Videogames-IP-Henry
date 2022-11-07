@@ -27,7 +27,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/videogames", videogamesRouter);
-server.use("/genre", genreRouter);
+server.use("/genres", genreRouter);
 
 // Error catching endware.
 server.use((err, req, res, next) => {
