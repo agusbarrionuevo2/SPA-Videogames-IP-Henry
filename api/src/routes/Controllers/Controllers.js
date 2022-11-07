@@ -24,6 +24,7 @@ async function getAllGenres () {
 			}
 		})
 	})
+	return 'Genres were saved in the Videogames database'
 }
 
 //Busca los videojuegos de la API y busca los videojuegos de la api que coincidan con el nombre que recibe por parametro --------
@@ -76,9 +77,20 @@ async function getVideogameDetail (id) {
 }
 
 //Crea un videojuego ------------------------------------------------------------------------------------------------------
-async function createVideogame (name, description, release_date, rating) {
-	if(!name || !description || !release_date || !rating) throw new Error('Not enough information')
-
+async function createVideogame ({name, description, release_date, rating, platforms}) {
+	if(!name || !description || !platforms) throw new Error('Not enough information')
+	else {
+		const newVideogame = await Videogame.findOrCreate({
+			where: {
+				name,
+				description,
+				release_date,
+				rating,
+				platforms,
+			} 
+		})
+		return newVideogame
+	}
 }
 
 

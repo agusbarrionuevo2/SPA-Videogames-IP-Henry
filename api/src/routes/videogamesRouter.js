@@ -25,9 +25,9 @@ videogamesRouter.get('/:id', async (req, res) => {
 })
 
 videogamesRouter.post('/', async (req, res) => {
-	const {name, description, release_Date, rating} = req.body
+	const {name, description, release_date, rating, platforms} = req.body
 	try {
-		const newVideogame = createVideogame(name, description, release_Date, rating)
+		const newVideogame = await createVideogame({name, description, release_date, rating, platforms})
 		return res.status(200).send(newVideogame)
 	} catch (error) {
 		return res.status(404).send(error.message)
