@@ -3,7 +3,7 @@ const {
 	API_KEY
   } = process.env;
 const axios = require('axios');
-const {Op, Genre, Videogame} = require('../../db')
+const {Genre, Videogame} = require('../../db')
 
 
 
@@ -46,19 +46,14 @@ async function getVideogames (name) {
 		if(!result.length) throw new Error(`No matches were found with the name: ${name}`)
 		return result
 	}
-	const videogames = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
-	.then(response => response.data)
-	videogames.results.forEach(v => {
-			if(result.length < 15){
-				result.push({
-					name: v.name,
-					image: v.background_image,
-					genre: v.genres.map(g => g.name)
-				})
-			}
-		});
-	return result
+	return get100Videogames()
 }
+
+async function get100Videogames(){
+	const urls = [`https://api.rawg.io/api/games?key=${API_KEY}&page=1`, `https://api.rawg.io/api/games?key=${API_KEY}&page=2`, `https://api.rawg.io/api/games?key=${API_KEY}&page=3`, `https://api.rawg.io/api/games?key=${API_KEY}&page=4`, `https://api.rawg.io/api/games?key=${API_KEY}&page=5`]
+	let requests = await Promise.all(urls.map(u => axios.get(u).then(response => response.data)))
+	return requests
+}	
 
 //Busca info un videojuego en especifico ---------------------------------------------------------------------------------------
 async function getVideogameDetail (id) {
@@ -100,5 +95,6 @@ module.exports = {
 	getAllGenres,
 	getVideogames,
 	getVideogameDetail,
-	createVideogame
+	createVideogame,
+	get100Videogames
 }
