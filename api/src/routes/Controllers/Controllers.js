@@ -3,7 +3,6 @@ const {
 	API_KEY
   } = process.env;
 const axios = require('axios');
-const db = require('../../db');
 const {Genre, Videogame} = require('../../db')
 
 
