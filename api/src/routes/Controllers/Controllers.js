@@ -3,6 +3,7 @@ const {
 	API_KEY
   } = process.env;
 const axios = require('axios');
+const db = require('../../db');
 const {Genre, Videogame} = require('../../db')
 
 
@@ -27,11 +28,11 @@ async function getAllGenres () {
 	return 'Genres were saved in the Videogames database'
 }
 
-//Busca los videojuegos de la API y busca los videojuegos de la api que coincidan con el nombre que recibe por parametro --------
+//Busca los videojuegos de la API y busca los primeros 15 videojuegos de la api que coincidan con el nombre que recibe por parametro --------
 //filtra lo que devuelve axios y devuelve solo la informacion necesaria para la ruta principal
 async function getVideogames (name) {
 	let result = []
-	if(name){
+	if(name){ //by name
 		const videogamesByName = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)
 			.then(response => response.data)
 				videogamesByName.results.forEach(v => {
@@ -46,14 +47,49 @@ async function getVideogames (name) {
 		if(!result.length) throw new Error(`No matches were found with the name: ${name}`)
 		return result
 	}
+	//todos los videojuegos
 	return get100Videogames()
 }
 
+//Busca los primeros 100 videojuegos de la api
 async function get100Videogames(){
 	const urls = [`https://api.rawg.io/api/games?key=${API_KEY}&page=1`, `https://api.rawg.io/api/games?key=${API_KEY}&page=2`, `https://api.rawg.io/api/games?key=${API_KEY}&page=3`, `https://api.rawg.io/api/games?key=${API_KEY}&page=4`, `https://api.rawg.io/api/games?key=${API_KEY}&page=5`]
-	let requests = await Promise.all(urls.map(u => axios.get(u).then(response => response.data)))
-	return requests
-}	
+	const requests = await Promise.all(urls.map(u => axios.get(u).then(response => response.data)))
+	const result = []
+	const infoFilter = requests.forEach(r => r.results.forEach(v => result.push({
+							name: v.name,
+							image: v.background_image,
+							genre: v.genres.map(g => g.name)
+						})))
+	return result
+}
+
+//Busca los videojuegos de la db por nombre y tambien busca todos los videojuegos de la db
+async function getVideogamesFromDb(name){
+	if(name){
+		let videogames = Videogame.findAll({
+			where: {
+				name: name
+			}
+		})
+		return videogames 
+	}	
+	let videogames = Videogame.findAll()
+	return videogames
+}
+
+
+//trae todos los videojuegos, tanto de la db como de la api. y tambien lo hace por nombre
+async function getAllVideogames(name){
+	if(name){
+		const dbByName = await getVideogamesFromDb(name)
+		const apiByName = await getVideogames(name)
+		return apiByName.concat(dbByName)
+	}
+	const dB = await getVideogamesFromDb()
+	const api = await getVideogames() 
+	return dB.concat(api)
+}
 
 //Busca info un videojuego en especifico ---------------------------------------------------------------------------------------
 async function getVideogameDetail (id) {
@@ -96,5 +132,7 @@ module.exports = {
 	getVideogames,
 	getVideogameDetail,
 	createVideogame,
-	get100Videogames
+	get100Videogames,
+	getVideogamesFromDb,
+	getAllVideogames
 }

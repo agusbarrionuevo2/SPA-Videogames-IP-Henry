@@ -34,6 +34,8 @@ const { Videogame, Genre } = sequelize.models;
 // Aca vendrian las relaciones
 Videogame.belongsToMany(Genre, {through: 'VideogamexGenre'})
 Genre.belongsToMany(Videogame, {through:'VideogamexGenre'})
+Videogame.hasMany(Genre)
+Genre.hasMany(Videogame)
 // Product.hasMany(Reviews);
 
 module.exports = {
