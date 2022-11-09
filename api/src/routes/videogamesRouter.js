@@ -2,7 +2,8 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const videogamesRouter = Router();
-const {getVideogameDetail, createVideogame, getAllVideogames} = require('./Controllers/Controllers')
+const {getVideogameDetail, getAllVideogames} = require('./Controllers/Controllers')
+const {Genre, Videogame, Op} = require('../db')
 
 videogamesRouter.get('/', async (req, res)=> {
 	const { name } = req.query
@@ -25,9 +26,14 @@ videogamesRouter.get('/:id', async (req, res) => {
 })
 
 videogamesRouter.post('/', async (req, res) => {
-	const {name, description, release_date, rating, platforms} = req.body
+	const {name, description, release_date, rating, platforms, genre} = req.body
 	try {
-		const newVideogame = await createVideogame({name, description, release_date, rating, platforms})
+		// const newVideogame = await createVideogame({name, description, release_date, rating, platforms})
+		const newVideogame = await Videogame.create({name, description, release_date, rating, platforms})
+		const genreDb = await Genre.findAll({
+			where: { name: genre },
+		});
+		newVideogame.addGenre(genreDb)
 		return res.status(200).send(newVideogame)
 	} catch (error) {
 		return res.status(404).send(error.message)

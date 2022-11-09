@@ -6,19 +6,19 @@ export const validations = (input) => {
 
 	if(!input.name){
 		error.name = 'Name is required'
-	} else if (!/^[A-Za-z]+$/.test(input.name)){
+	} else if (input.name.length > 25 || input.name.length < 3){
 		error.name = 'Name invalid'
 	}
 
 	if(!input.description){
 		error.description = 'Description is required'
-	} else if(/.{1,100}(?=\\s)/.test(input.description)){
+	} else if(input.description.length > 100 || input.description.length < 25){
 		error.description = 'Description invalid'
 	}
-	// } else if(){
 
-	// }
-
+	if(!input.rating){
+		error.rating = 'Rating is required'
+	} else if(input.rating > 5 || input.rating < 0) error.rating = 'Rating invalid'
 	return error;
 
 }
@@ -54,27 +54,26 @@ export default function VideogameCreate(){
 
 	return (
 		<div>
-			<h1>Create</h1>
+			<h1>Create Videogame</h1>
 			{/* debe contener formulario CONTROLADO x JS de creacion de videojuegos 
 				con los campos nombre, descripcion, fecha de lanzamiento y  rating
 				debe tener la posibilidad de agregar varios generos
-				debe tener la posibilidad de agregar varias plataformas
-
-			*/}
+				debe tener la posibilidad de agregar varias plataformas*/}
 			<form>
 				<label>Name: </label>
 					<input type='text' name='name' value={input.name} onChange={handlerInput}></input>
 					{error.name && (<p>{error.name}</p>)}
 				<hr/>
 				<label>Description: </label>
-					<input type='text' name='description' value={input.description} onChange={handlerInput}></input>
+					<textarea name='description' value={input.description} onChange={handlerInput}></textarea>
 					{error.description && (<p>{error.description}</p>)}
 				<hr/>
 				<label>Release Date: </label>
-					<input type='text' name='releaseDate' value={input.releaseDate} onChange={handlerInput}></input>
+					<input type='date' name='releaseDate' max='2022-11-30' value={input.releaseDate} onChange={handlerInput}></input>
 				<hr/>
 				<label>Rating: </label>
 					<input type='text' name='rating' value={input.rating} onChange={handlerInput}></input>
+					{error.rating && (<p>{error.rating}</p>)}
 				<hr/>
 				<label>Genre: </label>
 					<select>
