@@ -1,9 +1,25 @@
 import './App.css';
+import { Route } from "react-router-dom"
+import Home from './Components/Home';
+import VideogameDetail from './Components/VideogameDetail';
+import VideogameCreate from './Components/VideogameCreate';
+import Landing from './Components/Landing';
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Videogames LANDING PAGE</h1>
+      <Route exact path="/">
+        <Landing/>
+      </Route>
+      <Route exact path="/home">
+        <Home/>
+      </Route>
+      <Route exact path="/detail">
+        <VideogameDetail/>
+      </Route>
+      <Route exact path="/create">
+        <VideogameCreate/>
+      </Route>
     </div>
   );
 }
