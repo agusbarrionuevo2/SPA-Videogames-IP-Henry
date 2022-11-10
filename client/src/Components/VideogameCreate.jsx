@@ -1,33 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './style/VideogameCreate.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getGenres } from "../redux/actions/actions";
 
 export const validations = (input) => {
 	let error ={}
 
 	if(!input.name){
 		error.name = 'Name is required'
-	} else if (input.name.length > 25 || input.name.length < 3){
+	} else if (!/^[a-zA-Z0-9 ]{0,25}$/.test(input.name)){
 		error.name = 'Name invalid'
 	}
 
 	if(!input.description){
 		error.description = 'Description is required'
-	} else if(input.description.length > 100 || input.description.length < 25){
+	} else if(!/^[a-zA-Z0-9 ,.]{0,150}$/.test(input.description)){
 		error.description = 'Description invalid'
 	}
 
 	if(!input.rating){
 		error.rating = 'Rating is required'
-	} else if(input.rating > 5 || input.rating < 0) error.rating = 'Rating invalid'
+	} else if(!/^[1-5]\d*(\.\d)?$/.test(input.rating)) error.rating = 'Rating invalid'
 	return error;
 
 }
 
 
 export default function VideogameCreate(){
-
+	
+	const dispatch = useDispatch();
+	
+	const genreDb = useSelector(state => state.genres)
+	const platforms = [
+		'PC',
+		'Playstation 5',
+		'Playstation 4',
+		'Playstation 3',
+		'Playstation 2',
+		'Xbox One',
+		'Xbox Series S/X',
+		'Xbox 360',
+		'Nintendo Switch',
+		'iOS',
+		'Android',
+		'Nintendo 3DS',
+		'Nintendo DS',
+		'Wii',
+	]
+	
 	const [error, setError] = useState({})
-
+	
 	const [input, setInput] = useState({
 		name: '',
 		description: '',
@@ -35,6 +57,10 @@ export default function VideogameCreate(){
 		releaseDate: ''
 	})
 
+	useEffect(() =>{
+	   dispatch(getGenres())
+	},[dispatch])
+	
 	const handlerInput = (event) => {
 		setInput({
 			...input,
@@ -51,14 +77,9 @@ export default function VideogameCreate(){
 	}
 
 
-
 	return (
 		<div>
 			<h1>Create Videogame</h1>
-			{/* debe contener formulario CONTROLADO x JS de creacion de videojuegos 
-				con los campos nombre, descripcion, fecha de lanzamiento y  rating
-				debe tener la posibilidad de agregar varios generos
-				debe tener la posibilidad de agregar varias plataformas*/}
 			<form>
 				<label>Name: </label>
 					<input type='text' name='name' value={input.name} onChange={handlerInput}></input>
@@ -76,13 +97,19 @@ export default function VideogameCreate(){
 					{error.rating && (<p>{error.rating}</p>)}
 				<hr/>
 				<label>Genre: </label>
-					<select>
-						<option></option>
+					<select  name='Genre'>
+						<option>Select Genre</option>
+						{
+							genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
+						}
 					</select>
 				<hr/>
 				<label>Platforms: </label>
 					<select>
-						<option></option>
+						<option>Select Platforms</option>
+						{
+							platforms && platforms.map((p, index) => (<option key={index}value={p}>{p}</option>))
+						}
 					</select>
 				<hr/>
 				<button type="submit" onClick={handlerSubmit}>Create Videogame</button>

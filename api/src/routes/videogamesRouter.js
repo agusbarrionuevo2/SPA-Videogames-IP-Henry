@@ -29,6 +29,7 @@ videogamesRouter.post('/', async (req, res) => {
 	const {name, description, release_date, rating, platforms, genre} = req.body
 	try {
 		// const newVideogame = await createVideogame({name, description, release_date, rating, platforms})
+		if(!name || !description || !platforms) throw new Error('Not enough information')
 		const newVideogame = await Videogame.create({name, description, release_date, rating, platforms})
 		const genreDb = await Genre.findAll({
 			where: { name: genre },

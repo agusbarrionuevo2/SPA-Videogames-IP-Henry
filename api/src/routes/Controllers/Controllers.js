@@ -24,7 +24,7 @@ async function getAllGenres () {
 			}
 		})
 	})
-	return 'Genres were saved in the Videogames database'
+	return genres
 }
 
 //Busca los videojuegos de la API y busca los primeros 15 videojuegos de la api que coincidan con el nombre que recibe por parametro --------
@@ -35,14 +35,14 @@ async function getVideogames (name) {
 		const videogamesByName = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)
 			.then(response => response.data)
 				videogamesByName.results.forEach(v => {
-					// if(result.length < 15){
+					 if(result.length < 15){
 					// 	result.push({
 					// 		name: v.name,
 					// 		image: v.background_image,
 					// 		genre: v.genres.map(g => g.name)
 					// 	})
-					// }
-					result.push(v)
+						result.push(v)
+					 }
 				});
 		if(!result.length) throw new Error(`No matches were found with the name: ${name}`)
 		return result
