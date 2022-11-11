@@ -8,6 +8,9 @@ export default function Landing(){
       		<NavLink to="/home">
 			  <button>Home</button>
 			</NavLink>
+			<NavLink to="/create">
+				<button>Create</button>
+			</NavLink>
 		</div>
 	)
 }

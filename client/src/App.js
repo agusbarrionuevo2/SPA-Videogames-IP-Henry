@@ -1,24 +1,24 @@
-import './App.css';
-import { Route } from "react-router-dom"
-import Home from './Components/Home';
-import VideogameDetail from './Components/VideogameDetail';
-import VideogameCreate from './Components/VideogameCreate';
-import Landing from './Components/Landing';
+import "./App.css";
+import { Route } from "react-router-dom";
+import Home from "./Components/Home";
+import VideogameDetail from "./Components/VideogameDetail";
+import VideogameCreate from "./Components/Form";
+import Landing from "./Components/Landing";
 
 function App() {
   return (
     <div className="App">
       <Route exact path="/">
-        <Landing/>
+        <Landing />
       </Route>
       <Route exact path="/home">
-        <Home/>
+        <Home />
       </Route>
       <Route exact path="/detail">
-        <VideogameDetail/>
+        <VideogameDetail />
       </Route>
       <Route exact path="/create">
-        <VideogameCreate/>
+        <VideogameCreate />
       </Route>
     </div>
   );

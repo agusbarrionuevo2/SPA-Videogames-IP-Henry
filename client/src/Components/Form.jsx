@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './style/VideogameCreate.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getGenres } from "../redux/actions/actions";
+import { createVideogame, getGenres } from "../redux/actions/actions";
 
 export const validations = (input) => {
 	let error ={}
@@ -31,6 +31,7 @@ export default function VideogameCreate(){
 	const dispatch = useDispatch();
 	
 	const genreDb = useSelector(state => state.genres)
+
 	const platforms = [
 		'PC',
 		'Playstation 5',
@@ -49,12 +50,13 @@ export default function VideogameCreate(){
 	]
 	
 	const [error, setError] = useState({})
-	
+
 	const [input, setInput] = useState({
 		name: '',
 		description: '',
 		rating: '',
-		releaseDate: ''
+		releaseDate: '',
+		platforms: '',
 	})
 
 	useEffect(() =>{
@@ -74,6 +76,7 @@ export default function VideogameCreate(){
 
 	const handlerSubmit = (event) => {
 		event.preventDefault()
+		dispatch(createVideogame(input))
 	}
 
 
@@ -97,7 +100,7 @@ export default function VideogameCreate(){
 					{error.rating && (<p>{error.rating}</p>)}
 				<hr/>
 				<label>Genre: </label>
-					<select  name='Genre'>
+					<select  name='genre' value={input.genres} onChange={handlerInput}>
 						<option>Select Genre</option>
 						{
 							genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
@@ -105,7 +108,7 @@ export default function VideogameCreate(){
 					</select>
 				<hr/>
 				<label>Platforms: </label>
-					<select>
+					<select name='platforms' value={input.platforms} onChange={handlerInput}>
 						<option>Select Platforms</option>
 						{
 							platforms && platforms.map((p, index) => (<option key={index}value={p}>{p}</option>))
