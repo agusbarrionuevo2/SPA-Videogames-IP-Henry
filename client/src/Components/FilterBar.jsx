@@ -8,3 +8,11 @@
 <option Value="ascendente">orden ascendente</option>
 <option Value="descendente">orden descendente</option>
 </select> */}
+
+export function FilterBar(){
+	return (
+		<div>
+			
+		</div>
+	)
+}

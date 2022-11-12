@@ -1,15 +1,17 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import './style/VideogameCard.css'
 
+export function VideogameCard ({name, image, genre}) {
 
-export function VideogameCard ({name, description, rating, releaseDate, platforms, genres}) {
 	return (
-		<div>
-			{/* <p>{name}</p>
-			<p>{description}</p>
-			<p>{rating}</p>
-			<p>{releaseDate}</p>
-			<p>{platforms.platform}</p>
-			<p>{genres}</p> */}
+		<div className="card" onClick={''}>
+			<img src={image} alt='img'/>
+			<div className="container">
+				<h1>Name: {name}</h1>
+				<h2>Genres: {genre}</h2>
+			</div>
 		</div>
 	)
 }

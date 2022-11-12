@@ -2,6 +2,9 @@ import React from "react";
 
 
 export default function VideogameDetail(){
+	
+
+
 	return(
 		<div>
 			<h1>Detalle</h1>

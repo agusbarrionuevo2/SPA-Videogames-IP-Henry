@@ -1,7 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames } from "../redux/actions/actions";
+import { getVideogameDetail, getVideogames } from "../redux/actions/actions";
 import { VideogameCard } from "./VideogameCard";
+import { NavBar } from "./NavBar";
+import { SearchBar } from "./SearchBar";
+import { FilterBar } from "./FilterBar";
 
 
 export default function Home (){
@@ -9,26 +12,26 @@ export default function Home (){
 
 	useEffect(() =>{
 		dispatch(getVideogames())
+		dispatch(getVideogameDetail(id))
 	 },[dispatch])
 
 	const videogames = useSelector(state => state.videogames)
-	 console.log(videogames)
+
 	const [input, setInput] = useState({
 		videogames: []
 	})
 
-
 	return (
 		<div>
 			<h1>Home</h1>
+			<NavBar/>
+			<SearchBar/>
+			<FilterBar/>
 			<div>
 				{videogames.map(v => <VideogameCard
 					name={v.name}
-					description={v.description}
-					rating={v.rating}
-					releaseDate={v.releaseDate}
-					platforms= {v.platforms}
-					genres={v.genres}
+					genre={v.genre}
+					image={v.image}
 				/>)}
 			</div>
 		</div>

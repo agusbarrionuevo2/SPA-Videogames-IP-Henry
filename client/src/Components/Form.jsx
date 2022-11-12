@@ -56,7 +56,7 @@ export default function VideogameCreate(){
 		description: '',
 		rating: '',
 		releaseDate: '',
-		platforms: '',
+		platforms: [],
 	})
 
 	useEffect(() =>{
@@ -67,6 +67,17 @@ export default function VideogameCreate(){
 		setInput({
 			...input,
 			[event.target.name] : event.target.value
+		})
+		setError(validations({
+			...input,
+			[event.target.name]: event.target.value
+		}))
+	}
+
+	const handlerGenrePlatforms = (event) => {
+		setInput({
+			...input,
+			[event.target.name]: [event.target.name].push(event.target.value)
 		})
 		setError(validations({
 			...input,
@@ -100,7 +111,7 @@ export default function VideogameCreate(){
 					{error.rating && (<p>{error.rating}</p>)}
 				<hr/>
 				<label>Genre: </label>
-					<select  name='genre' value={input.genres} onChange={handlerInput}>
+					<select  name='genre' value={input.genres} onChange={handlerGenrePlatforms}>
 						<option>Select Genre</option>
 						{
 							genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
@@ -108,7 +119,7 @@ export default function VideogameCreate(){
 					</select>
 				<hr/>
 				<label>Platforms: </label>
-					<select name='platforms' value={input.platforms} onChange={handlerInput}>
+					<select name='platforms' value={input.platforms} onChange={handlerGenrePlatforms}>
 						<option>Select Platforms</option>
 						{
 							platforms && platforms.map((p, index) => (<option key={index}value={p}>{p}</option>))

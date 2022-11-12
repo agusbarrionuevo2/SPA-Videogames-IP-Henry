@@ -36,11 +36,11 @@ async function getVideogames (name) {
 			.then(response => response.data)
 				videogamesByName.results.forEach(v => {
 					 if(result.length < 15){
-					// 	result.push({
-					// 		name: v.name,
-					// 		image: v.background_image,
-					// 		genre: v.genres.map(g => g.name)
-					// 	})
+						result.push({
+							name: v.name,
+							image: v.background_image,
+							genre: v.genres.map(g => g.name)
+						})
 						result.push(v)
 					 }
 				});
@@ -56,12 +56,12 @@ async function get100Videogames(){
 	const urls = [`https://api.rawg.io/api/games?key=${API_KEY}&page=1`, `https://api.rawg.io/api/games?key=${API_KEY}&page=2`, `https://api.rawg.io/api/games?key=${API_KEY}&page=3`, `https://api.rawg.io/api/games?key=${API_KEY}&page=4`, `https://api.rawg.io/api/games?key=${API_KEY}&page=5`]
 	const requests = await Promise.all(urls.map(u => axios.get(u).then(response => response.data)))
 	const result = []
-	const infoFilter = requests.forEach(r => r.results.forEach(v => result.push(v)))
-	// const infoFilter = requests.forEach(r => r.results.forEach(v => result.push({
-	// 						name: v.name,
-	// 						image: v.background_image,
-	// 						genre: v.genres.map(g => g.name)
-	// 					})))
+	// const infoFilter = requests.forEach(r => r.results.forEach(v => result.push(v)))
+	const infoFilter = requests.forEach(r => r.results.forEach(v => result.push({
+							name: v.name,
+							image: v.background_image,
+							genre: v.genres.map(g => g.name).join(', ')
+						})))
 	return result
 }
 
@@ -112,26 +112,6 @@ async function getVideogameDetail (id) {
 	return videogameDetail
 }
 
-//no funciona lo de abajo
-//Crea un videojuego ------------------------------------------------------------------------------------------------------
-// async function createVideogame ({name, description, release_date, rating, platforms}) {
-// 	if(!name || !description || !platforms) throw new Error('Not enough information')
-// 	else {
-// 		const newVideogame = await Videogame.findOrCreate({
-// 			where: {
-// 				name,
-// 				description,
-// 				release_date,
-// 				rating,
-// 				platforms,
-// 			} 
-// 		})
-// 		const genreDb = await Genre.findAll({
-// 			where: { name: genre },
-// 		});
-// 		return newVideogame
-// 	}
-// }
 
 
 

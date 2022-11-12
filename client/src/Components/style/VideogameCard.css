@@ -1,0 +1,18 @@
+.card {
+	width: 20rem;
+	height: 25rem;
+	transition: 03.s;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); ;
+	padding: 10px;
+	border-color: black;
+	border-width: 10px;
+	border-radius: 20px;
+}
+
+.container {
+	padding: 2px 16px;
+}
+
+img {
+	width: 100%;
+}

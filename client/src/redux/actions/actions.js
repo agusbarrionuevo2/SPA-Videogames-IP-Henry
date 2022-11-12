@@ -1,15 +1,22 @@
 import axios from 'axios'
-export const GET_ALL_VIDEOGAMES = 'GET_ALL_GAMES'
+export const GET_ALL_VIDEOGAMES = 'GET_ALL_VIDEOGAMES'
 export const GET_GENRES = 'GET_GENRES'
-export const CREATE_VIDEOGAME = 'CREATE_GAME'
-export const GET_GAMES_BY_NAME = 'GET_GAMES_BY_NAME'
-export const GET_GAME_DETAILs = 'GET_GAME_DETAILS'
+export const CREATE_VIDEOGAME = 'CREATE_VIDEOGAME'
+export const GET_VIDEOGAMES_BY_NAME = 'GET_VIDEOGAMES_BY_NAME'
+export const GET_VIDEOGAME_DETAILS = 'GET_VIDEOGAMEGAME_DETAILS'
 
 
 export function getGenres () {
 	return async function (dispatch) {
 		const response = await axios.get('http://localhost:3001/genres')
 			return dispatch({type: GET_GENRES, payload: response.data})
+	}
+}
+
+export function getVideogamesByName (name) {
+	return async function (dispatch) {
+		const response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+			return dispatch({type: GET_VIDEOGAMES_BY_NAME, payload: response.data})
 	}
 }
 
@@ -27,6 +34,16 @@ export function createVideogame (videogame) {
 			return dispatch({
 				type: CREATE_VIDEOGAME,
 				payload: newVideogame.data
+			})
+	}
+}
+
+export function getVideogameDetail (id) {
+	return async function (dispatch) {
+		const idVideogame = await axios.get(`http://localhost:3001/videogames/:${id}`)
+			return dispatch({
+				type : GET_VIDEOGAME_DETAILS,
+				payload: idVideogame.data
 			})
 	}
 }
