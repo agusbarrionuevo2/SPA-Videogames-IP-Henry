@@ -12,7 +12,7 @@ export default function Home (){
 
 	useEffect(() =>{
 		dispatch(getVideogames())
-		dispatch(getVideogameDetail(id))
+		// dispatch(getVideogameDetail(id))
 	 },[dispatch])
 
 	const videogames = useSelector(state => state.videogames)
@@ -29,6 +29,7 @@ export default function Home (){
 			<FilterBar/>
 			<div>
 				{videogames.map(v => <VideogameCard
+					id={v.id}
 					name={v.name}
 					genre={v.genre}
 					image={v.image}

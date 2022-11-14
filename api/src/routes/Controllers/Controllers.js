@@ -37,6 +37,7 @@ async function getVideogames (name) {
 				videogamesByName.results.forEach(v => {
 					 if(result.length < 15){
 						result.push({
+							id: v.id,
 							name: v.name,
 							image: v.background_image,
 							genre: v.genres.map(g => g.name)
@@ -58,6 +59,7 @@ async function get100Videogames(){
 	const result = []
 	// const infoFilter = requests.forEach(r => r.results.forEach(v => result.push(v)))
 	const infoFilter = requests.forEach(r => r.results.forEach(v => result.push({
+							id: v.id,
 							name: v.name,
 							image: v.background_image,
 							genre: v.genres.map(g => g.name).join(', ')
@@ -101,6 +103,7 @@ async function getVideogameDetail (id) {
 	const videogame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
 		.then(response => response.data)
 	const videogameDetail = {
+		id: id,
 		name: videogame.name,
 		description: videogame.description,
 		image: videogame.background_image,

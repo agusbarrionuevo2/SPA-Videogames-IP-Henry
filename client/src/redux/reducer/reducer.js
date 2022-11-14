@@ -1,9 +1,10 @@
-import {CREATE_VIDEOGAME, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME} from '../actions/actions.js'
+import {CLEAN_DETAIL, CREATE_VIDEOGAME, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_DETAIL} from '../actions/actions.js'
 
 
 const initialState = {
 	genres: [],
-	videogames: []
+	videogames: [],
+	videogameDetail: {}
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -27,6 +28,16 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				videogames: action.payload
+			}
+		case GET_VIDEOGAME_DETAIL:
+			return {
+				...state,
+				videogameDetail: action.payload
+			}
+		case CLEAN_DETAIL: 
+			return {
+				...state,
+				videogameDetail: {}
 			}
 		default:
 			return{...state}
