@@ -5,6 +5,9 @@ export const CREATE_VIDEOGAME = 'CREATE_VIDEOGAME'
 export const GET_VIDEOGAMES_BY_NAME = 'GET_VIDEOGAMES_BY_NAME'
 export const GET_VIDEOGAME_DETAIL = 'GET_VIDEOGAMEGAME_DETAIL'
 export const CLEAN_DETAIL = 'CLEAN_DETAIL'
+export const FILTER_BY_GENRE = 'FILTER_BY_GENRE'
+export const FILTER_BY_NAME = 'FILTER_BY_NAME'
+export const FILTER_BY_RATING = 'FILTER_BY_RATING'
 
 
 export function getGenres () {
@@ -46,6 +49,27 @@ export function getVideogameDetail (id) {
 				type : GET_VIDEOGAME_DETAIL,
 				payload: idVideogame.data
 			})
+	}
+}
+
+export function filterByName (payload) {
+	return {
+		type: FILTER_BY_NAME,
+		payload
+	}
+}
+
+export function filterByGenre (payload){
+	return {
+		type: FILTER_BY_GENRE,
+		payload
+	}
+}
+
+export function filterByRating(payload){
+	return {
+		type: FILTER_BY_RATING,
+		payload
 	}
 }
 

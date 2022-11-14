@@ -1,6 +1,6 @@
-import { React, useState, useEffect } from "react";
+import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogameDetail, getVideogames } from "../redux/actions/actions";
+import { getVideogames } from "../redux/actions/actions";
 import { VideogameCard } from "./VideogameCard";
 import { NavBar } from "./NavBar";
 import { SearchBar } from "./SearchBar";
@@ -12,14 +12,9 @@ export default function Home (){
 
 	useEffect(() =>{
 		dispatch(getVideogames())
-		// dispatch(getVideogameDetail(id))
 	 },[dispatch])
 
 	const videogames = useSelector(state => state.videogames)
-
-	const [input, setInput] = useState({
-		videogames: []
-	})
 
 	return (
 		<div>

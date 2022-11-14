@@ -1,4 +1,4 @@
-import {CLEAN_DETAIL, CREATE_VIDEOGAME, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_DETAIL} from '../actions/actions.js'
+import {CLEAN_DETAIL, CREATE_VIDEOGAME, FILTER_BY_GENRE, FILTER_BY_NAME, FILTER_BY_RATING, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_DETAIL} from '../actions/actions.js'
 
 
 const initialState = {
@@ -38,6 +38,37 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				videogameDetail: {}
+			}
+		case FILTER_BY_GENRE: 
+			const filter = state.videogames.filter(v =>{v.genre.includes(action.payload)})
+			return {
+				...state,
+				videogames: filter
+			}
+		case FILTER_BY_NAME: 
+			return {
+				...state
+			}
+		case FILTER_BY_RATING:
+			if(action.payload === '0-5'){
+				return {
+					...state,
+					videogames: state.videogames.sort((a,b) => {
+						return a.rating - b.rating
+					})
+				}
+			} else if( action.payload ==='5-0'){
+				return {
+					...state,
+					videogames: state.videogames.sort((a,b) => {
+						return b.rating - a.rating
+					})
+				}
+			} else {
+				return {
+					...state,
+					videogames: state.videogames
+				}
 			}
 		default:
 			return{...state}

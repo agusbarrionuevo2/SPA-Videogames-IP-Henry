@@ -25,7 +25,6 @@ export default function VideogameDetail(props){
 			<p>Release Date: {videogameDetail.release_date}</p>
 			<p>Platforms: {videogameDetail.platforms}</p>
 			<p>Genre: {videogameDetail.genre}</p>	
-			{/* mostrar imagen nombre, generos, descripcion, releasedate, rating y plataformas de el videojuego en cuestion */}
 		</div>
 	)
 }

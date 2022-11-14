@@ -111,7 +111,7 @@ export default function VideogameCreate(){
 					{error.rating && (<p>{error.rating}</p>)}
 				<hr/>
 				<label>Genre: </label>
-					<select  name='genre' value={input.genres} onChange={handlerGenrePlatforms}>
+					<select  name='genre' value={input.genres} onChange={handlerGenrePlatforms} multiple>
 						<option>Select Genre</option>
 						{
 							genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
@@ -119,7 +119,7 @@ export default function VideogameCreate(){
 					</select>
 				<hr/>
 				<label>Platforms: </label>
-					<select name='platforms' value={input.platforms} onChange={handlerGenrePlatforms}>
+					<select name='platforms' value={input.platforms} onChange={handlerGenrePlatforms} multiple>
 						<option>Select Platforms</option>
 						{
 							platforms && platforms.map((p, index) => (<option key={index}value={p}>{p}</option>))
