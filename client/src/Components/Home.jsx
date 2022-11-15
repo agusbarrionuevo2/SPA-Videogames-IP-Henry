@@ -15,7 +15,6 @@ export default function Home (){
 	 },[dispatch])
 
 	const videogames = useSelector(state => state.videogames)
-
 	return (
 		<div>
 			<h1>Home</h1>
@@ -27,7 +26,8 @@ export default function Home (){
 					id={v.id}
 					name={v.name}
 					genre={v.genre}
-					image={v.image}
+					image= {v.image}
+					rating = {v.rating}
 				/>)}
 			</div>
 		</div>

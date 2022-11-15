@@ -15,10 +15,15 @@ export default function VideogameDetail(props){
 		}
 	}, [dispatch, props.match.params.id])
 
+	console.log(videogameDetail)
 
+	// if(!videogameDetail.image){
+	// 	videogameDetail.image = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png';
+	// }
 	return(
 		<div>
 			<h1>Detalle</h1>
+			<img src={videogameDetail.image} alt='img'/>
 			<h1>Name: {videogameDetail.name}</h1>
 			<p>Description: {videogameDetail.description}</p>
 			<p>Rating: {videogameDetail.rating}</p>

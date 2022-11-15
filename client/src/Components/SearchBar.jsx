@@ -5,6 +5,7 @@ import { getVideogamesByName } from "../redux/actions/actions"
 
 export function SearchBar (){
 	const dispatch = useDispatch()
+	
 	const handlerChange = (event) => {
 		event.preventDefault()
 		dispatch(getVideogamesByName(event.target.value))

@@ -40,7 +40,8 @@ async function getVideogames (name) {
 							id: v.id,
 							name: v.name,
 							image: v.background_image,
-							genre: v.genres.map(g => g.name)
+							genre: v.genres.map(g => g.name),
+							rating: v.rating
 						})
 						result.push(v)
 					 }
@@ -62,7 +63,8 @@ async function get100Videogames(){
 							id: v.id,
 							name: v.name,
 							image: v.background_image,
-							genre: v.genres.map(g => g.name).join(', ')
+							genre: v.genres.map(g => g.name),
+							rating: v.rating
 						})))
 	return result
 }

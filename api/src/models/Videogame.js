@@ -25,8 +25,13 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL
     },
     platforms: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
-    }
+    },
+    // image: {
+    //   type: DataTypes.BLOB,
+    //   defaultValue: 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png',
+    //   allowNull: false
+    // }
   }, { timestamps: false});
 };

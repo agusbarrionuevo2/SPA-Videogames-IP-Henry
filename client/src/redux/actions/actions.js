@@ -60,6 +60,7 @@ export function filterByName (payload) {
 }
 
 export function filterByGenre (payload){
+	
 	return {
 		type: FILTER_BY_GENRE,
 		payload

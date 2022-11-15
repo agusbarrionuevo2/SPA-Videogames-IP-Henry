@@ -8,9 +8,11 @@ export function FilterBar(){
 
 	const dispatch = useDispatch()
 
+	const videogames = useSelector(state => state.videogames)
+
 	useEffect(()=> {
 		dispatch(getGenres())
-	})
+	},[videogames, dispatch])
 
 	const genres = useSelector(state => state.genres)
 
@@ -31,24 +33,29 @@ export function FilterBar(){
 
 	return (
 		<div>
-			<label>Filter By: </label>
-				<select name="FilterByName" onChange={handlerName}>
-					<optgroup label="By Name">
-						<option value='A-Z'>A-Z</option>
-						<option value='Z-A'>Z-A</option>
-					</optgroup>
-				</select>
-			<label> Rating: </label>
-				<select name="FilterByRating" onChange={handlerRating}>
-					<optgroup label="By Rating">
-						<option value='0-5'>0-5</option>
-						<option value='5-0'>5-0</option>
-					</optgroup>
-				</select>
-			<label>Genre: </label>
-				<select onChange={handlerGenre}>
-					{ genres && genres.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))}
-				</select>
+			<form>
+				<label>Filter by Name: </label>
+					<select name="FilterByName" onChange={handlerName}>
+						<option defaultValue='ALL'></option>
+						<optgroup label="By Name">
+							<option value='A-Z'>A-Z</option>
+							<option value='Z-A'>Z-A</option>
+						</optgroup>
+					</select>
+				<label> Rating: </label>
+					<select name="FilterByRating" onChange={handlerRating}>
+						<option defaultValue='ALL'></option>
+						<optgroup label="By Rating">
+							<option value='0-5'>0-5</option>
+							<option value='5-0'>5-0</option>
+						</optgroup>
+					</select>
+				<label>Genre: </label>
+					<select onChange={handlerGenre}>
+						<option defaultValue='ALL'></option>
+						{ genres && genres.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))}
+					</select>
+			</form>
 		</div>
 	)
 }
