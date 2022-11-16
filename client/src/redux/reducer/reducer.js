@@ -4,6 +4,7 @@ import {CLEAN_DETAIL, CREATE_VIDEOGAME, FILTER_BY_GENRE, FILTER_BY_NAME, FILTER_
 const initialState = {
 	genres: [],
 	videogames: [],
+	allVideogames: [],
 	videogameDetail: {}
 }
 
@@ -17,6 +18,7 @@ const rootReducer = (state = initialState, action) => {
 		case GET_ALL_VIDEOGAMES:
 			return {
 				...state,
+				allVideogames: action.payload,
 				videogames: action.payload
 			}
 		case CREATE_VIDEOGAME: 
@@ -41,8 +43,6 @@ const rootReducer = (state = initialState, action) => {
 			}
 		case FILTER_BY_GENRE:
 			if(action.payload){
-				console.log(action.payload)
-				console.log(state.videogames)
 				const filter = state.videogames.filter(v => v.genre.includes(action.payload))
 				return {
 					...state,
@@ -51,27 +51,26 @@ const rootReducer = (state = initialState, action) => {
 			} else {
 				return {
 					...state,
-					videogames: state.videogames
+					allVideogames: state.allVideogames
 				}
 			}
 		case FILTER_BY_NAME:
 			if(action.payload === 'A-Z'){
-				console.log(state.videogames)
+				const byName = state.videogames.sort((a,b) => { return a.name.localeCompare(b.name) })
+				console.log(byName)
 				return {
 					...state,
-					videogames: state.videogames.sort((a,b)=>{
-						return a.name.localeCompare(b.name)
-					})
+					videogames: byName
 				}
 			} else if(action.payload === 'Z-A'){
-				console.log(state.videogames)
+				const byName = state.videogames.sort((a,b) => { return b.name.localeCompare(a.name) })
+				console.log(byName)
 				return{
 					...state,
-					videogames: state.videogames.sort((a,b) => {
-						return b.name.localeCompare(a.name)
-					})
+					videogames: byName
 				}
 			} else {
+				console.log(state.videogames)
 				return {
 					...state,
 					videogames: state.videogames
@@ -79,22 +78,18 @@ const rootReducer = (state = initialState, action) => {
 			}
 		case FILTER_BY_RATING:
 			if(action.payload === '0-5'){
-				console.log('filter 0-5')
-				console.log(state.videogames)
+				const sort =  state.videogames.sort((a,b) => { return a.rating - b.rating })
+				console.log(sort)
 				return {
 					...state,
-					videogames: state.videogames.sort((a,b) => {
-						return a.rating - b.rating
-					})
+					videogames: sort
 				}
 			} else if( action.payload ==='5-0'){
-				console.log('filter 5-0')
-				console.log(state.videogames)
+				const sort = state.videogames.sort((a,b) => { return b.rating - a.rating })
+				console.log(sort)
 				return {
 					...state,
-					videogames: state.videogames.sort((a,b) => {
-						return b.rating - a.rating
-					})
+					videogames: sort
 				}
 			} else {
 				console.log('filter')

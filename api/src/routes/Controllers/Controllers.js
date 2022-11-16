@@ -58,7 +58,6 @@ async function get100Videogames(){
 	const urls = [`https://api.rawg.io/api/games?key=${API_KEY}&page=1`, `https://api.rawg.io/api/games?key=${API_KEY}&page=2`, `https://api.rawg.io/api/games?key=${API_KEY}&page=3`, `https://api.rawg.io/api/games?key=${API_KEY}&page=4`, `https://api.rawg.io/api/games?key=${API_KEY}&page=5`]
 	const requests = await Promise.all(urls.map(u => axios.get(u).then(response => response.data)))
 	const result = []
-	// const infoFilter = requests.forEach(r => r.results.forEach(v => result.push(v)))
 	const infoFilter = requests.forEach(r => r.results.forEach(v => result.push({
 							id: v.id,
 							name: v.name,

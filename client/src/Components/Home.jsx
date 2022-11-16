@@ -10,11 +10,12 @@ import { FilterBar } from "./FilterBar";
 export default function Home (){
 	const dispatch = useDispatch()
 
+	const videogames = useSelector(state => state.videogames)
+
 	useEffect(() =>{
 		dispatch(getVideogames())
 	 },[dispatch])
 
-	const videogames = useSelector(state => state.videogames)
 	return (
 		<div>
 			<h1>Home</h1>

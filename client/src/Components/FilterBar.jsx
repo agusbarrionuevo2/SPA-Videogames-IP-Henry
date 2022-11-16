@@ -8,11 +8,11 @@ export function FilterBar(){
 
 	const dispatch = useDispatch()
 
-	const videogames = useSelector(state => state.videogames)
+	// const videogames = useSelector(state => state.videogames)
 
 	useEffect(()=> {
 		dispatch(getGenres())
-	},[videogames, dispatch])
+	},[dispatch])
 
 	const genres = useSelector(state => state.genres)
 
