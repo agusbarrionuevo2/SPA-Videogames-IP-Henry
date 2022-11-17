@@ -1,4 +1,4 @@
-import {CLEAN_DETAIL, CREATE_VIDEOGAME, FILTER_BY_GENRE, FILTER_BY_NAME, FILTER_BY_RATING, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_DETAIL} from '../actions/actions.js'
+import {CLEAN_DETAIL, CREATE_VIDEOGAME, FILTER_BY_CREATION, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_DETAIL} from '../actions/actions.js'
 
 
 const initialState = {
@@ -43,7 +43,16 @@ const rootReducer = (state = initialState, action) => {
 			}
 		case FILTER_BY_GENRE:
 			if(action.payload){
-				const filter = state.videogames.filter(v => v.genre.includes(action.payload)) //no me esta tomando los genres de la base de datos
+				const filter = state.allVideogames.filter(function(v){
+					if(v.genre){
+						let coincidence = v.genre.includes(action.payload)
+						return coincidence
+					}
+					else if(v.Genre) {
+						let coincidence = v.Genre && v.Genre.includes(action.payload)
+						return coincidence
+					} 
+				}) 
 				return {
 					...state,
 					videogames: filter
@@ -51,10 +60,10 @@ const rootReducer = (state = initialState, action) => {
 			} else {
 				return {
 					...state,
-					videogames: state.videogames
+					videogames: state.allVideogames
 				}
 			}
-		case FILTER_BY_NAME:
+		case ORDER_BY_NAME:
 			if(action.payload === 'A-Z'){
 				const byName = state.videogames.sort((a,b) => { return a.name.localeCompare(b.name) })
 				console.log(byName)
@@ -76,7 +85,7 @@ const rootReducer = (state = initialState, action) => {
 					videogames: state.videogames
 				}
 			}
-		case FILTER_BY_RATING:
+		case ORDER_BY_RATING:
 			if(action.payload === '0-5'){
 				const sort =  state.videogames.sort((a,b) => { return a.rating - b.rating })
 				console.log(sort)
@@ -93,6 +102,27 @@ const rootReducer = (state = initialState, action) => {
 				}
 			} else {
 				console.log('filter')
+				return {
+					...state,
+					videogames: state.videogames
+				}
+			}
+		case FILTER_BY_CREATION: 
+			if(action.payload === 'api'){
+				const sortApi = state.videogames.filter(v => typeof v.id === 'number' )
+				console.log(sortApi)
+				return {
+					...state,
+					videogames: sortApi
+				}
+			} else if(action.payload === 'db') {
+				const sortDb = state.videogames.filter(v => typeof v.id === 'string')
+				console.log(sortDb)
+				return {
+					...state,
+					videogames: sortDb
+				}
+			} else {
 				return {
 					...state,
 					videogames: state.videogames

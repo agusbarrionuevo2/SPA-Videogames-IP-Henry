@@ -6,8 +6,9 @@ export const GET_VIDEOGAMES_BY_NAME = 'GET_VIDEOGAMES_BY_NAME'
 export const GET_VIDEOGAME_DETAIL = 'GET_VIDEOGAMEGAME_DETAIL'
 export const CLEAN_DETAIL = 'CLEAN_DETAIL'
 export const FILTER_BY_GENRE = 'FILTER_BY_GENRE'
-export const FILTER_BY_NAME = 'FILTER_BY_NAME'
-export const FILTER_BY_RATING = 'FILTER_BY_RATING'
+export const ORDER_BY_NAME = 'ORDER_BY_NAME'
+export const ORDER_BY_RATING = 'ORDER_BY_RATING'
+export const FILTER_BY_CREATION = 'FILTER_BY_CREATION'
 
 
 export function getGenres () {
@@ -52,9 +53,9 @@ export function getVideogameDetail (id) {
 	}
 }
 
-export function filterByName (payload) {
+export function orderByName (payload) {
 	return {
-		type: FILTER_BY_NAME,
+		type: ORDER_BY_NAME,
 		payload
 	}
 }
@@ -67,13 +68,20 @@ export function filterByGenre (payload){
 	}
 }
 
-export function filterByRating(payload){
+export function orderByRating(payload){
 	return {
-		type: FILTER_BY_RATING,
+		type: ORDER_BY_RATING,
 		payload
 	}
 }
 
 export function cleanDetail () {
 	return {type :CLEAN_DETAIL}
+}
+
+export function filterByCreation (payload) {
+	return {
+		type: FILTER_BY_CREATION,
+		payload
+	}
 }

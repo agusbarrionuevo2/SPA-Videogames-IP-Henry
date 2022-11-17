@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filterByGenre, filterByName, filterByRating, getGenres } from "../redux/actions/actions"
-// import { useState } from 'react'
+import { filterByGenre, filterByName, filterByRating, getGenres, getVideogames } from "../redux/actions/actions"
+import { useState } from 'react'
 
 
 
@@ -9,28 +9,34 @@ export function FilterBar(){
 
 	const dispatch = useDispatch()
 
-	// const [alfabetical, setAlfabetical] = useState('')
+	const [alfabetical, setAlfabetical] = useState('')
 
-	// const [rating, setRating] = useState('')
+	const [rating, setRating] = useState('')
 
 	// const videogames = useSelector(state => state.videogames)
+	const genres = useSelector(state => state.genres)
 
 	useEffect(()=> {
+		dispatch(getVideogames())
 		dispatch(getGenres())
 	},[dispatch])
 
-	const genres = useSelector(state => state.genres)
+	const handleClick = (event) => {
+		event.preventDefault();
+		dispatch(getVideogames())
+	}
+
 
 	const handlerRating = (event) => {
 		event.preventDefault()
 		dispatch(filterByRating(event.target.value))
-		// setRating(`Order ${event.target.value}`)
+		setRating(`Order ${event.target.value}`)
 	}
 
 	const handlerName = (event) => {
 		event.preventDefault()
 		dispatch(filterByName(event.target.value))
-		// setAlfabetical(`Order ${event.target.value}`)
+		setAlfabetical(`Order ${event.target.value}`)
 	}
 
 	const handlerGenre = (event) => {
@@ -40,6 +46,7 @@ export function FilterBar(){
 
 	return (
 		<div>
+			<button onClick={(event) => handleClick(event)}>Load videogames</button>
 			<form>
 				<label>Filter by Name: </label>
 					<select name="FilterByName" onChange={(event) => handlerName(event)}>
