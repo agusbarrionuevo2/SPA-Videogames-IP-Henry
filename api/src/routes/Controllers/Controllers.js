@@ -74,11 +74,32 @@ async function getVideogamesFromDb(name){
 		let videogames = Videogame.findAll({
 			where: {
 				name: name
+			},
+				include: [
+					{
+						model: Genre,
+						attributes: ["name"],
+						through: {
+							attributes: []
+						}
+					}
+				]
 			}
-		})
+		)
 		return videogames 
 	}	
-	let videogames = Videogame.findAll()
+	let videogames = Videogame.findAll({
+			include: [
+				{
+					model: Genre,
+					attributes: ["name"],
+					through: {
+						attributes: []
+					}
+				}
+			]
+		}
+	)
 	return videogames
 }
 
@@ -98,7 +119,18 @@ async function getAllVideogames(name){
 //Busca info un videojuego en especifico ---------------------------------------------------------------------------------------
 async function getVideogameDetail (id) {
 	if(id.includes("-")){
-		const videogame = await Videogame.findByPk(id)
+		const videogame = await Videogame.findByPk(id, {
+			include: [
+				{
+					model: Genre,
+					attributes: ["name"],
+					through: {
+						attributes: []
+					}
+				}
+			]
+		})
+		console.log(videogame)
 		return videogame
 	}
 	const videogame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)

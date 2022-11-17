@@ -14,8 +14,8 @@ export default function VideogameDetail(props){
 			dispatch(cleanDetail())   //funcion que limpia el detalle una vez que salimos de la pag, vuelve a poner al estado como un obj vacio
 		}
 	}, [dispatch, props.match.params.id])
-
 	console.log(videogameDetail)
+	
 
 	// if(!videogameDetail.image){
 	// 	videogameDetail.image = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png';
@@ -29,7 +29,7 @@ export default function VideogameDetail(props){
 			<p>Rating: {videogameDetail.rating}</p>
 			<p>Release Date: {videogameDetail.release_date}</p>
 			<p>Platforms: {videogameDetail.platforms}</p>
-			<p>Genre: {videogameDetail.genre}</p>	
+			<p>Genres:{videogameDetail.Genres && videogameDetail.Genres.map(g => g.name + ', ')} </p>	
 		</div>
 	)
 }

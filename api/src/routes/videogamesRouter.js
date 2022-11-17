@@ -26,14 +26,20 @@ videogamesRouter.get('/:id', async (req, res) => {
 })
 
 videogamesRouter.post('/', async (req, res) => {
-	const {name, description, release_date, rating, platforms, genre} = req.body
+	const {name, description, release_date, rating, platforms, genres} = req.body
 	try {
-		if(!name || !description || !platforms) throw new Error('Not enough information')
-		const newVideogame = await Videogame.create(req.body)
+		const exists = await Videogame.findOne({
+			where: { name }
+		})
+		if(exists) return res.status(400).send('A game with that name already exists')
+		const newVideogame = await Videogame.create({name, description, platforms, rating, release_date})
+
 		const genreDb = await Genre.findAll({
-			where: { name: genre },
+			where: { name: genres }
 		});
+
 		newVideogame.addGenre(genreDb)
+
 		return res.status(200).send(newVideogame)
 	} catch (error) {
 		return res.status(404).send(error.message)
