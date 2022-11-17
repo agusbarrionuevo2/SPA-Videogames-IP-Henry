@@ -62,6 +62,12 @@ export function FilterBar(){
 						<option defaultValue='ALL'></option>
 						{ genres && genres.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))}
 					</select>
+				<label>Created At:</label>
+					<select>
+						<option defaultValue='ALL'></option>
+						<option value='db'>Database</option>
+						<option value='api'>API</option>
+					</select>
 				{/* <button onClick={cleanFilters()}>Clear Filters</button> */}
 			</form>
 		</div>

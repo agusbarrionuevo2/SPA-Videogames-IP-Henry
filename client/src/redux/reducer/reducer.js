@@ -43,7 +43,7 @@ const rootReducer = (state = initialState, action) => {
 			}
 		case FILTER_BY_GENRE:
 			if(action.payload){
-				const filter = state.videogames.filter(v => v.genre.includes(action.payload))
+				const filter = state.videogames.filter(v => v.genre.includes(action.payload)) //no me esta tomando los genres de la base de datos
 				return {
 					...state,
 					videogames: filter

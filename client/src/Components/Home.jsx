@@ -15,7 +15,7 @@ export default function Home (){
 	useEffect(() =>{
 		dispatch(getVideogames())
 	 },[dispatch])
-	 console.log(videogames)
+
 	return (
 		<div>
 			<h1>Home</h1>
@@ -26,7 +26,7 @@ export default function Home (){
 				{videogames.map(v =>  <VideogameCard
 					id={v.id}
 					name={v.name}
-					genre={v.genre || v.Genres && v.Genres.map(g => g.name)}
+					genre={v.genre || (v.Genres && v.Genres.map(g => g.name))}
 					image= {v.image}
 					rating = {v.rating}
 				/>)}
