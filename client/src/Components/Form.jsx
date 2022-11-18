@@ -32,6 +32,7 @@ export default function VideogameCreate(){
 	
 	const genreDb = useSelector(state => state.genres)
 
+
 	const platforms = [
 		'PC',
 		'Playstation 5',
@@ -54,7 +55,7 @@ export default function VideogameCreate(){
 	const [input, setInput] = useState({
 		name: '',
 		description: '',
-		rating: '',
+		rating: 1,
 		release_date: '',
 		platforms: [],
 		genres: []
@@ -96,15 +97,14 @@ export default function VideogameCreate(){
 
 
 	const handlerSubmit = (event) => {
-		input.platforms.toString()
 		event.preventDefault()
+		input.platforms.toString()
 		dispatch(createVideogame(input))
 		event.target.reset()
-		alert("Videogame created succesfully!")
 		setInput({
 			name: '',
 			description: '',
-			rating: '',
+			rating: 1,
 			release_date: '',
 			platforms: [],
 			genres: []
@@ -149,13 +149,8 @@ export default function VideogameCreate(){
 					</select>
 				<hr/>
 					<ul><li>{input.platforms.map(p =>p + ',')}</li></ul>
-				<button type="submit">Create Videogame</button>
+				<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create Videogame</button>
 			</form>
 		</div>
 	)
 }
-
-//Nombre
-// Descripción
-// Fecha de lanzamiento
-// Rating

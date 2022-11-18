@@ -28,6 +28,7 @@ videogamesRouter.get('/:id', async (req, res) => {
 videogamesRouter.post('/', async (req, res) => {
 	const {name, description, release_date, rating, platforms, genres} = req.body
 	try {
+		if(!name || !description || !platforms) return res.status(400)
 		const exists = await Videogame.findOne({
 			where: { name }
 		})

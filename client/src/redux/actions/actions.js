@@ -33,13 +33,13 @@ export function getVideogames () {
 }
 
 export function createVideogame (videogame) {
-	console.log(videogame)
 	return async function (dispatch) {
-		const newVideogame = await axios.post('http://localhost:3001/videogames', videogame)
-			return dispatch({
-				type: CREATE_VIDEOGAME,
-				payload: newVideogame.data
-			})
+		const newVideogame = await axios.post('http://localhost:3001/videogames', videogame).catch(error => {if(error.response) alert(error.response.data)})
+		if(newVideogame.data) alert("Videogame succesfully created!")
+		return dispatch({
+			type: CREATE_VIDEOGAME,
+			payload: newVideogame.data
+		})
 	}
 }
 
