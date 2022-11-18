@@ -66,14 +66,12 @@ const rootReducer = (state = initialState, action) => {
 		case ORDER_BY_NAME:
 			if(action.payload === 'A-Z'){
 				const byName = state.videogames.sort((a,b) => { return a.name.localeCompare(b.name) })
-				console.log(byName)
 				return {
 					...state,
 					videogames: byName
 				}
 			} else if(action.payload === 'Z-A'){
 				const byName = state.videogames.sort((a,b) => { return b.name.localeCompare(a.name) })
-				console.log(byName)
 				return{
 					...state,
 					videogames: byName
@@ -88,14 +86,12 @@ const rootReducer = (state = initialState, action) => {
 		case ORDER_BY_RATING:
 			if(action.payload === '0-5'){
 				const sort =  state.videogames.sort((a,b) => { return a.rating - b.rating })
-				console.log(sort)
 				return {
 					...state,
 					videogames: sort
 				}
 			} else if( action.payload ==='5-0'){
 				const sort = state.videogames.sort((a,b) => { return b.rating - a.rating })
-				console.log(sort)
 				return {
 					...state,
 					videogames: sort
@@ -109,15 +105,13 @@ const rootReducer = (state = initialState, action) => {
 			}
 		case FILTER_BY_CREATION: 
 			if(action.payload === 'api'){
-				const sortApi = state.videogames.filter(v => typeof v.id === 'number' )
-				console.log(sortApi)
+				const sortApi = state.allVideogames.filter(v => typeof v.id === 'number' )
 				return {
 					...state,
 					videogames: sortApi
 				}
 			} else if(action.payload === 'db') {
-				const sortDb = state.videogames.filter(v => typeof v.id === 'string')
-				console.log(sortDb)
+				const sortDb = state.allVideogames.filter(v => typeof v.id === 'string')
 				return {
 					...state,
 					videogames: sortDb

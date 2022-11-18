@@ -4,21 +4,33 @@ import { useState } from "react";
 import { VideogameCard } from "./VideogameCard";
 import { NavBar } from "./NavBar";
 import { SearchBar } from "./SearchBar";
+import {Paginate} from './Paginate'
 import {filterByCreation, filterByGenre, orderByName, orderByRating, getGenres, getVideogames } from "../redux/actions/actions"
 
 
 export default function Home (){
 	
 	const dispatch = useDispatch()
+	
+	const genres = useSelector(state => state.genres)
+	const videogames = useSelector(state => state.videogames)
 
 	const [alfabetical, setAlfabetical] = useState('')
-
+	
 	const [rating, setRating] = useState('')
+//Paginado
+	const [currentPage, setCurrentPage ] = useState(1);
+	const [videogamesPerPage, setVideogamesPerPage ] = useState(15);
+	const ultimo = currentPage * videogamesPerPage
+	const primero = ultimo - videogamesPerPage
+	const games = videogames.slice(primero, ultimo)
+
+	const setPagination = (page) => {
+		return setCurrentPage(page)
+	}
 
 	// const videogames = useSelector(state => state.videogames)
-	const genres = useSelector(state => state.genres)
 
-	const videogames = useSelector(state => state.videogames)
 
 	useEffect(() =>{
 		dispatch(getVideogames())
@@ -92,13 +104,21 @@ export default function Home (){
 						</form>
 					</div>
 			<div>
-				{videogames.map(v =>  <VideogameCard
+				{games.map(v =>  <VideogameCard
 					id={v.id}
 					name={v.name}
 					genre={v.genre || (v.Genres && v.Genres.map(g => g.name))}
 					image= {v.image}
 					rating = {v.rating}
 				/>)}
+				<div>
+					<Paginate
+					videogamesPerPage={videogamesPerPage}
+					allVideogames={videogames.length}
+					setPagination={setPagination}
+					currentPage={currentPage}
+					/>
+				</div>
 			</div>
 		</div>
 	)
