@@ -2,18 +2,20 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import './style/VideogameCard.css'
 
-export function VideogameCard ({name, image, genre, id, rating}) {
+export function VideogameCard ({name, image, genre, id}) {
 
 	return (
-		<NavLink to={`/detail/${id}`}>
-				<div className="card">
-					<img src={image} alt='img'/>
-					<div className="container">
-						<h1>Name: {name}</h1>
-						<h2>Genres: {genre && genre.map(g => g + ', ')}</h2>
-						<h2>Rating: {rating}</h2>
+		<div className="card-container">
+			<NavLink to={`/detail/${id}`}>
+					<div className="card">
+						<img src={image} alt='img' className="card-img"/>
+						<h1 className="card-header">Name: {name}</h1>
+						<p className="card-body">Genres: {genre && genre.map(g => g + ', ')}</p>
+							{/* <div className="card-footer">
+								<button>delete</button>
+							</div> */}
 					</div>
-				</div>
-		</NavLink>
+			</NavLink>
+		</div>
 	)
 }

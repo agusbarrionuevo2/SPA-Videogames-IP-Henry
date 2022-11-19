@@ -1,0 +1,25 @@
+.text-input{
+	width: 25%;
+	margin-left: 0;
+}
+textarea {
+	width: 30%;
+	height: 75px;
+}
+
+.releaseDate {
+	width: auto;
+}
+
+.rating {
+	width: auto;
+}
+
+.platformSelector {
+	display: inline-block;
+}
+
+.select {
+	display: inline-block;
+	align-items: center;
+}

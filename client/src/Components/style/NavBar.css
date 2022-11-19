@@ -1,0 +1,20 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+.navbar-container {
+	list-style-type: none;
+	overflow: hidden;
+	background-color: #333;
+	position: fixed;
+	width: 100%;
+}
+li {
+	display: inline-block;
+	width: 80px;
+	padding-right: 4rem;
+	padding-left: 4rem;
+}
+
+

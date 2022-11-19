@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './style/VideogameCreate.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { createVideogame, getGenres } from "../redux/actions/actions";
+import './style/Form.css'
 
 export const validations = (input) => {
 	let error ={}
@@ -109,35 +110,36 @@ export default function VideogameCreate(){
 
 	return (
 		<div>
-			<h1>Create Videogame</h1>
+			<h1>Create Your Own Videogame</h1>
 				<form onSubmit={(event) => handlerSubmit(event)}>
 					<label>Name: </label>
-						<input type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)}></input>
+						<input className='text-input' type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)} placeholder='Be creative!...'></input>
 						{error.name && (<p>{error.name}</p>)}
 					<hr/>
 					<label>Description: </label>
-						<textarea name='description' value={input.description} onChange={(event) => handlerInput(event)}></textarea>
+						<textarea  className='text-input' name='description' value={input.description} onChange={(event) => handlerInput(event)} placeholder='How would you describe this game?'></textarea>
 						{error.description && (<p>{error.description}</p>)}
 					<hr/>
 					<label>Release Date: </label>
-						<input type='date' name='release_date' max='2022-11-30' value={input.release_date} onChange={(event) => handlerInput(event)}></input>
+						<input className="releaseDate" type='date' name='release_date' max='2022-11-30' value={input.release_date} onChange={(event) => handlerInput(event)}></input>
 					<hr/>
 					<label>Rating: </label>
-						<input type='number' min='1' max='5' name='rating' value={input.rating} onChange={(event) => handlerInput(event)}></input>
+						<input  className='rating' type='number' min='1' max='5' step='0.1' name='rating' value={input.rating} onChange={(event) => handlerInput(event)}></input>
 						{error.rating && (<p>{error.rating}</p>)}
 					<hr/>
 					<label>Genre: </label>
-						<select  name='genre' value={input.genres} onChange={(event) => handleSelectGenres(event)} >
+						<select  name='genre' value={input.genres} onChange={(event) => handleSelectGenres(event)}>
 							<option>Select Genre</option>
 							{
 								genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
 							}
 						</select>
-						<ul><li key='selectedGenres'>{input.genres.map(g => g + ',')}</li></ul>
+						<ul><li key='selectedGenres'>Selected genres: {input.genres.map(g => g + ',')}</li></ul>
 					<hr/>
 					<label>Platforms: </label>
+						<div className='platformsSelector'>
 							{platforms.map(p => (
-								<div key={p}>
+								<div className="select">
 									<input
 									type='checkbox'
 									name='platforms'
@@ -146,17 +148,21 @@ export default function VideogameCreate(){
 									></input>
 									<label name={p}>{p}</label>
 								</div>
-							))}
-						{/* <select name='platforms' value={input.platforms} onChange={(event) => handleSelectPlatforms(event)} >
+									))}
+						</div>
+					<hr/>
+					<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create</button>
+				</form>
+		</div>
+	)
+}
+
+
+{/* <select name='platforms' value={input.platforms} onChange={(event) => handleSelectPlatforms(event)} >
 							<option key='allPlatforms'>Select Platforms</option>
 							{
 								platforms && platforms.map((p, index) => (<option key={index} value={p}>{p}</option>))
 							}
 						</select> */}
-					<hr/>
+
 						{/* <ul><li key='selectedPlatforms'>{input.platforms.map(p =>p + ',')}</li></ul> */}
-					<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create Videogame</button>
-				</form>
-		</div>
-	)
-}

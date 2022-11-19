@@ -6,7 +6,7 @@ import { NavBar } from "./NavBar";
 import { SearchBar } from "./SearchBar";
 import {Paginate} from './Paginate'
 import {filterByCreation, filterByGenre, orderByName, orderByRating, getGenres, getVideogames } from "../redux/actions/actions"
-
+import './style/Home.css'
 
 export default function Home (){
 	
@@ -62,11 +62,10 @@ export default function Home (){
 	}
 
 	return (
-			<div>
+			<div className="home-container">
 				<h1>Home</h1>
 				<SearchBar/>
-					<div>
-						<form>
+					<div className="filters-container">
 							<label>Filter by Name: </label>
 								<select key='selectFilterName' name="FilterByName" onChange={(event) => handlerName(event)}>
 									<option key='ALLBYNAME'defaultValue='ALL'></option>
@@ -95,17 +94,16 @@ export default function Home (){
 									<option key='api' value='api'>API</option>
 								</select>
 							 <button onClick={() => cleanFilters()}>Clear Filters</button> 
-						</form>
 					</div>
-				<div>
+				<div className="card-layout">
 					{games.map(v =>  <VideogameCard
 						key={v.id}
 						id={v.id}
 						name={v.name}
 						genre={v.genre || (v.Genres && v.Genres.map(g => g.name))}
 						image= {v.image}
-						rating = {v.rating}
 					/>)}
+				</div>
 					<div>
 						<Paginate
 						videogamesPerPage={videogamesPerPage}
@@ -115,7 +113,6 @@ export default function Home (){
 						setCurrentPage= {setCurrentPage}
 						/>
 					</div>
-				</div>
 			</div>
 	)
 }

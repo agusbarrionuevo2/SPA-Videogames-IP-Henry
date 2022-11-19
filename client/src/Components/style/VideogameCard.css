@@ -1,18 +1,38 @@
+.card-container{
+	background-color: #7fb3d5;
+	padding: 1rem;
+	border: 1px solid #777;
+	border-radius: 1rem;
+	display: inline-block;
+	padding-bottom: 0.5rem;
+	border: 2px solid black;
+	margin: 2rem;
+	box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 1);
+}
+
 .card {
+	height: 20rem;
 	width: 20rem;
-	height: 25rem;
-	transition: 03.s;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); ;
-	padding: 10px;
-	border-color: black;
-	border-width: 10px;
-	border-radius: 20px;
 }
 
-.container {
-	padding: 2px 16px;
+
+.card-header {
+	font-size: 1.5rem;
 }
 
-img {
-	width: 100%;
+.card-body {
+	font-size: 1rem;
+}
+
+.card-footer {
+	margin-top: 1rem;
+}
+
+
+.card-img{
+    height: 150pxpx;
+    width: 250px; 
+    margin: 1px;
+    padding: 3px;
+    box-shadow: 0.1em 0.5em 0.3em black;
 }

@@ -9,12 +9,12 @@ import { NavBar } from "./Components/NavBar";
 function App() {
   return (
     <div className="App">
-      <Route path='/'>
-        <NavBar/>
-        </Route>
       <Route exact path="/">
         <Landing />
       </Route>
+      <Route path='/'>
+        <NavBar/>
+        </Route>
       <Route exact path="/home">
         <Home />
       </Route>

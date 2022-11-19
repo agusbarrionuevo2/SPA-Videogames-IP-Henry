@@ -8,13 +8,13 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 		pageNumber.push(i)													//allVideogames es donde estan todos los videojuegos y videojuegos es la cantidad de videojuegos por hoja osea 15
 	}																		//por cada iteracion va pusheando al array de  pageNumber cada pagina que sea ppsible crear
 
-	const handlePrev = () => {
-		if(currentPage === 1) setCurrentPage(1)  
+	const handlePrev = () => { //prev
+		if(currentPage === 1) setCurrentPage(1)  //si es la primer pag y apretas prev se va a poner devuelta la primer pag
 		else setCurrentPage(currentPage-1)
 	}
 
-	const handleNext = () => {
-		if(currentPage === pageNumber[pageNumber.length-1]) setCurrentPage(currentPage)
+	const handleNext = () => { //next
+		if(currentPage === pageNumber[pageNumber.length-1]) setCurrentPage(currentPage)  //si es la ultima pag y apretas next, no pasa a otra pag que no existe. se actualiza a la ultima devuelta
 		else setCurrentPage(currentPage+1)
 	}
 
