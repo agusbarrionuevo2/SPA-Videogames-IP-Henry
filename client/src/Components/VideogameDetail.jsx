@@ -15,9 +15,6 @@ export default function VideogameDetail(props){
 		}
 	}, [dispatch, props.match.params.id])
 
-	// if(!videogameDetail.image){
-	// 	videogameDetail.image = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png';
-	// }
 	return(
 		<div>
 			<h1>Detalle</h1>
@@ -27,7 +24,7 @@ export default function VideogameDetail(props){
 			<p key='rating'>Rating: {videogameDetail.rating}</p>
 			<p key='releaseDate'>Release Date: {videogameDetail.release_date}</p>
 			<p key='platformsDetail'>Platforms: {videogameDetail.platforms}</p>
-			<p key='genresDetail'>Genres:{videogameDetail.Genres && videogameDetail.Genres.map(g => g.name + ', ')}</p>	
+			<p key='genresDetail'>Genres:{videogameDetail.genre || (videogameDetail.Genres && videogameDetail.Genres.map(g => g.name + ', '))}</p>	
 		</div>
 	)
 }
