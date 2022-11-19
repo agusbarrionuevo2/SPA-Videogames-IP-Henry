@@ -112,12 +112,13 @@ export default function Home (){
 					rating = {v.rating}
 				/>)}
 				<div>
-					<Paginate
-					videogamesPerPage={videogamesPerPage}
-					allVideogames={videogames.length}
-					setPagination={setPagination}
-					currentPage={currentPage}
-					/>
+						<Paginate
+						videogamesPerPage={videogamesPerPage}
+						allVideogames={videogames.length}
+						setPagination={setPagination}
+						currentPage={currentPage}
+						setCurrentPage= {setCurrentPage}
+						/>
 				</div>
 			</div>
 		</div>

@@ -1,8 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 
 
-export function Paginate({allVideogames, videogamesPerPage, setPagination, currentPage}) {
+export function Paginate({allVideogames, videogamesPerPage, setPagination, currentPage, setCurrentPage}) {
 
 	const pageNumber = []
 
@@ -10,14 +11,28 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 		pageNumber.push(i)
 	}
 
+	const handlePrev = () => {
+		if(currentPage === 1) setCurrentPage(1)
+		else setCurrentPage(currentPage-1)
+	}
+
+	const handleNext = () => {
+		if(currentPage === pageNumber[pageNumber.length-1]) setCurrentPage(currentPage)
+		else setCurrentPage(currentPage+1)
+	}
+
 	return(
 		<div>
-			{allVideogames < 15 ? 
-			<div> {setPagination(1)}</div> : 
-			pageNumber && pageNumber.map(n =>(
-				<button onClick={() => setPagination(n)}>{n}</button>
-			))
-			}
+			<button onClick={() => handlePrev()}>prev</button>
+				<div>
+				{allVideogames < 15 ? 
+				<div> {setPagination(1)}</div> : 
+				pageNumber && pageNumber.map(n =>(
+					<button onClick={(event) => setPagination(n)} >{n}</button>
+				))
+				}
+				</div>
+			<button onClick={() => handleNext()}>next</button>
 		</div>
 	)
 }
