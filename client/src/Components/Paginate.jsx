@@ -1,18 +1,15 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-
-
 
 export function Paginate({allVideogames, videogamesPerPage, setPagination, currentPage, setCurrentPage}) {
 
-	const pageNumber = []
+	const pageNumber = []  //se declara array vacio para guardar los numeros de pagina
 
-	for(let i = 1; i <= Math.ceil(allVideogames/videogamesPerPage); i++){
-		pageNumber.push(i)
-	}
+	for(let i = 1; i <= Math.ceil(allVideogames/videogamesPerPage); i++){    //se recorre el array empezando por la hoja uno mientras que i sea menor a allVideogames/videogamesPerPage va a seguir iterando
+		pageNumber.push(i)													//allVideogames es donde estan todos los videojuegos y videojuegos es la cantidad de videojuegos por hoja osea 15
+	}																		//por cada iteracion va pusheando al array de  pageNumber cada pagina que sea ppsible crear
 
 	const handlePrev = () => {
-		if(currentPage === 1) setCurrentPage(1)
+		if(currentPage === 1) setCurrentPage(1)  
 		else setCurrentPage(currentPage-1)
 	}
 
@@ -25,12 +22,12 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 		<div>
 			<button onClick={() => handlePrev()}>prev</button>
 				<div>
-				{allVideogames < 15 ? 
-				<div> {setPagination(1)}</div> : 
-				pageNumber && pageNumber.map(n =>(
-					<button onClick={(event) => setPagination(n)} >{n}</button>
-				))
-				}
+					{allVideogames < 15 ? 
+					<div key='pagination'> {setPagination(1)}</div> : 
+					pageNumber && pageNumber.map(n =>(
+						<button key={n} onClick={(event) => setPagination(n)} >{n}</button>
+					))
+					}
 				</div>
 			<button onClick={() => handleNext()}>next</button>
 		</div>

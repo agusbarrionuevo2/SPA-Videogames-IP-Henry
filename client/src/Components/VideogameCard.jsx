@@ -8,8 +8,7 @@ export function VideogameCard ({name, image, genre, id, rating}) {
 	// }
 	
 	return (
-		<>
-			<NavLink to={`/detail/${id}`}>
+		<NavLink to={`/detail/${id}`}>
 				<div className="card">
 					<img src={image} alt='img'/>
 					<div className="container">
@@ -18,7 +17,6 @@ export function VideogameCard ({name, image, genre, id, rating}) {
 						<h2>Rating: {rating}</h2>
 					</div>
 				</div>
-			</NavLink>
-		</>
+		</NavLink>
 	)
 }

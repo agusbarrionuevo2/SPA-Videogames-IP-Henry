@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL
     },
     platforms: {
-      type: DataTypes.JSON,
+      type: DataTypes.STRING,
       allowNull: false
     },
     // image: {

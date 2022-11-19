@@ -4,10 +4,14 @@ import Home from "./Components/Home";
 import VideogameDetail from "./Components/VideogameDetail";
 import VideogameCreate from "./Components/Form";
 import Landing from "./Components/Landing";
+import { NavBar } from "./Components/NavBar";
 
 function App() {
   return (
     <div className="App">
+      <Route path='/'>
+        <NavBar/>
+        </Route>
       <Route exact path="/">
         <Landing />
       </Route>

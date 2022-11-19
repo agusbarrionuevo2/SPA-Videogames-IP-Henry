@@ -9,13 +9,11 @@ export default function VideogameDetail(props){
 	const videogameDetail = useSelector(state => state.videogameDetail)
 
 	useEffect(() => {
-		dispatch(getVideogameDetail(props.match.params.id))
+		dispatch(getVideogameDetail(props.match.params.id))//investigar bien match.params!
 		return () => {
 			dispatch(cleanDetail())   //funcion que limpia el detalle una vez que salimos de la pag, vuelve a poner al estado como un obj vacio
 		}
 	}, [dispatch, props.match.params.id])
-	console.log(videogameDetail)
-	
 
 	// if(!videogameDetail.image){
 	// 	videogameDetail.image = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png';
@@ -25,11 +23,11 @@ export default function VideogameDetail(props){
 			<h1>Detalle</h1>
 			<img src={videogameDetail.image} alt='img'/>
 			<h1>Name: {videogameDetail.name}</h1>
-			<p>Description: {videogameDetail.description}</p>
-			<p>Rating: {videogameDetail.rating}</p>
-			<p>Release Date: {videogameDetail.release_date}</p>
-			<p>Platforms: {videogameDetail.platforms}</p>
-			<p>Genres:{videogameDetail.Genres && videogameDetail.Genres.map(g => g.name + ', ')} </p>	
+			<p key='description'>Description: {videogameDetail.description}</p>
+			<p key='rating'>Rating: {videogameDetail.rating}</p>
+			<p key='releaseDate'>Release Date: {videogameDetail.release_date}</p>
+			<p key='platformsDetail'>Platforms: {videogameDetail.platforms}</p>
+			<p key='genresDetail'>Genres:{videogameDetail.Genres && videogameDetail.Genres.map(g => g.name + ', ')}</p>	
 		</div>
 	)
 }

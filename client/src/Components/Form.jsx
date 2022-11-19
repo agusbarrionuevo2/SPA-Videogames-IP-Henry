@@ -57,7 +57,7 @@ export default function VideogameCreate(){
 		description: '',
 		rating: 1,
 		release_date: '',
-		platforms: [],
+		platforms: '',
 		genres: []
 	})
 
@@ -77,28 +77,23 @@ export default function VideogameCreate(){
 	}
 
 	const handleSelectGenres = (event) => {
-		if(input.genres.includes(event.target.value)){
-			alert('ya existe ese genero')
-		} 
 		setInput({
 			...input,
 			genres: [...input.genres, event.target.value]
 		})
 	}
-	const handleSelectPlatforms = (event) => {
-		if(input.platforms.includes(event.target.value)){
-			alert('ya existe esa plataforma')
-		} 
-		setInput({
-			...input,
-			platforms: [...input.platforms, event.target.value]
-		})
+	const handleCheckedPlatforms = (event) => {
+		if(event.target.checked){
+			setInput({
+				...input,
+				platforms: input.platforms ? input.platforms + ', ' + event.target.value : event.target.value
+			})
+		}
 	}
 
 
 	const handlerSubmit = (event) => {
 		event.preventDefault()
-		input.platforms.toString()
 		dispatch(createVideogame(input))
 		event.target.reset()
 		setInput({
@@ -115,42 +110,53 @@ export default function VideogameCreate(){
 	return (
 		<div>
 			<h1>Create Videogame</h1>
-			<form onSubmit={(event) => handlerSubmit(event)}>
-				<label>Name: </label>
-					<input type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)}></input>
-					{error.name && (<p>{error.name}</p>)}
-				<hr/>
-				<label>Description: </label>
-					<textarea name='description' value={input.description} onChange={(event) => handlerInput(event)}></textarea>
-					{error.description && (<p>{error.description}</p>)}
-				<hr/>
-				<label>Release Date: </label>
-					<input type='date' name='release_date' max='2022-11-30' value={input.release_date} onChange={(event) => handlerInput(event)}></input>
-				<hr/>
-				<label>Rating: </label>
-					<input type='number' min='1' max='5' name='rating' value={input.rating} onChange={(event) => handlerInput(event)}></input>
-					{error.rating && (<p>{error.rating}</p>)}
-				<hr/>
-				<label>Genre: </label>
-					<select  name='genre' value={input.genres} onChange={(event) => handleSelectGenres(event)} >
-						<option>Select Genre</option>
-						{
-							genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
-						}
-					</select>
-					<ul><li>{input.genres.map(g => g + ',')}</li></ul>
-				<hr/>
-				<label>Platforms: </label>
-					<select name='platforms' value={input.platforms} onChange={(event) => handleSelectPlatforms(event)} >
-						<option>Select Platforms</option>
-						{
-							platforms && platforms.map((p, index) => (<option key={index}value={p}>{p}</option>))
-						}
-					</select>
-				<hr/>
-					<ul><li>{input.platforms.map(p =>p + ',')}</li></ul>
-				<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create Videogame</button>
-			</form>
+				<form onSubmit={(event) => handlerSubmit(event)}>
+					<label>Name: </label>
+						<input type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)}></input>
+						{error.name && (<p>{error.name}</p>)}
+					<hr/>
+					<label>Description: </label>
+						<textarea name='description' value={input.description} onChange={(event) => handlerInput(event)}></textarea>
+						{error.description && (<p>{error.description}</p>)}
+					<hr/>
+					<label>Release Date: </label>
+						<input type='date' name='release_date' max='2022-11-30' value={input.release_date} onChange={(event) => handlerInput(event)}></input>
+					<hr/>
+					<label>Rating: </label>
+						<input type='number' min='1' max='5' name='rating' value={input.rating} onChange={(event) => handlerInput(event)}></input>
+						{error.rating && (<p>{error.rating}</p>)}
+					<hr/>
+					<label>Genre: </label>
+						<select  name='genre' value={input.genres} onChange={(event) => handleSelectGenres(event)} >
+							<option>Select Genre</option>
+							{
+								genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
+							}
+						</select>
+						<ul><li key='selectedGenres'>{input.genres.map(g => g + ',')}</li></ul>
+					<hr/>
+					<label>Platforms: </label>
+							{platforms.map(p => (
+								<div key={p}>
+									<input
+									type='checkbox'
+									name='platforms'
+									value={p}
+									onChange={(event) => handleCheckedPlatforms(event)}
+									></input>
+									<label name={p}>{p}</label>
+								</div>
+							))}
+						{/* <select name='platforms' value={input.platforms} onChange={(event) => handleSelectPlatforms(event)} >
+							<option key='allPlatforms'>Select Platforms</option>
+							{
+								platforms && platforms.map((p, index) => (<option key={index} value={p}>{p}</option>))
+							}
+						</select> */}
+					<hr/>
+						{/* <ul><li key='selectedPlatforms'>{input.platforms.map(p =>p + ',')}</li></ul> */}
+					<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create Videogame</button>
+				</form>
 		</div>
 	)
 }
