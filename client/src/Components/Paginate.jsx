@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Paginate({allVideogames, videogamesPerPage, setPagination, currentPage, setCurrentPage}) {
+export function Paginate({allVideogames, videogamesPerPage, setPagination, currentPage, setCurrentPage}) {//all videogames = videogames.length => el estado videogames!
 
 	const pageNumber = []  //se declara array vacio para guardar los numeros de pagina
 
@@ -20,7 +20,7 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 
 	return(
 		<div>
-			<button onClick={() => handlePrev()}>prev</button>
+			<button onClick={() => handlePrev()} disabled={allVideogames < 15}>prev</button>
 				<div>
 					{allVideogames < 15 ? 
 					<div key='pagination'> {setPagination(1)}</div> : 
@@ -29,7 +29,7 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 					))
 					}
 				</div>
-			<button onClick={() => handleNext()}>next</button>
+			<button onClick={() => handleNext()} disabled={allVideogames < 15}>next</button>
 		</div>
 	)
 }
