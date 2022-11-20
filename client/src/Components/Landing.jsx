@@ -1,9 +1,10 @@
 import React from "react";
+import './style/Landing.css'
 
 export default function Landing(){
 	return(
-		<div>
-			<h1>Henry Videogames LANDING PAGE</h1>
+		<div className='landing-container'>
+			<h1 className="title">Welcome to Videogames!</h1>
 		</div>
 	)
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import './style/Paginate.css'
 
 export function Paginate({allVideogames, videogamesPerPage, setPagination, currentPage, setCurrentPage}) {//all videogames = videogames.length => el estado videogames!
 
@@ -19,13 +20,15 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 	}
 
 	return(
-		<div>
+		<div className="paginate-container">
 			<button onClick={() => handlePrev()} disabled={allVideogames < 15}>prev</button>
-				<div>
+				<div className='pages'>
 					{allVideogames < 15 ? 
 					<div key='pagination'> {setPagination(1)}</div> : 
 					pageNumber && pageNumber.map(n =>(
-						<button key={n} onClick={(event) => setPagination(n)} >{n}</button>
+						<div className='page'>
+							<button  key={n} onClick={(event) => setPagination(n)} >{n}</button>
+						</div>
 					))
 					}
 				</div>

@@ -1,0 +1,20 @@
+
+.landing-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.title {
+	display: inherit;
+	justify-content: inherit;
+	align-items: inherit;
+	background: rgba(61,48,48,0.5);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(61,48,48,0.25);
+	margin-top: 20%;
+	color: antiquewhite;
+	border-radius: 20px;
+	width: 27rem;
+}

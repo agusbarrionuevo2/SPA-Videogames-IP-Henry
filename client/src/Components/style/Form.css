@@ -23,3 +23,8 @@ textarea {
 	display: inline-block;
 	align-items: center;
 }
+
+
+hr {
+	border-style: none;
+}

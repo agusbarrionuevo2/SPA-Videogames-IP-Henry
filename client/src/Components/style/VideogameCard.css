@@ -15,6 +15,10 @@
 	width: 20rem;
 }
 
+.card:hover{
+	background-color: black;
+}
+
 
 .card-header {
 	font-size: 1.5rem;

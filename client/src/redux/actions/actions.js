@@ -9,6 +9,7 @@ export const FILTER_BY_GENRE = 'FILTER_BY_GENRE'
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 export const ORDER_BY_RATING = 'ORDER_BY_RATING'
 export const FILTER_BY_CREATION = 'FILTER_BY_CREATION'
+export const CLEAN_SEARCH = 'CLEAN_SEARCH'
 
 
 export function getGenres () {
@@ -20,7 +21,7 @@ export function getGenres () {
 
 export function getVideogamesByName (name) {
 	return async function (dispatch) {
-		const response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+		const response = await axios.get(`http://localhost:3001/videogames?name=${name}`).catch(error => alert(error.message))
 			return dispatch({type: GET_VIDEOGAMES_BY_NAME, payload: response.data})
 	}
 }
@@ -83,5 +84,11 @@ export function filterByCreation (payload) {
 	return {
 		type: FILTER_BY_CREATION,
 		payload
+	}
+}
+
+export function cleanSearch () {
+	return {
+		type: CLEAN_SEARCH,
 	}
 }

@@ -4,17 +4,28 @@
 	text-decoration: none;
 }
 .navbar-container {
+	display: flex;
+	background: rgba(61,48,48,0.5);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(61,48,48,0.25);
 	list-style-type: none;
 	overflow: hidden;
-	background-color: #333;
 	position: fixed;
 	width: 100%;
+	align-items: center;
+	justify-content: center;
+	height: 3rem;
 }
 li {
 	display: inline-block;
-	width: 80px;
+	width: fit-content;
 	padding-right: 4rem;
 	padding-left: 4rem;
+}
+
+p {
+	color: white;
 }
 
 

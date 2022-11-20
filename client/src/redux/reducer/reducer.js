@@ -1,4 +1,4 @@
-import {CLEAN_DETAIL, CREATE_VIDEOGAME, FILTER_BY_CREATION, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_DETAIL} from '../actions/actions.js'
+import {CLEAN_SEARCH, CLEAN_DETAIL, CREATE_VIDEOGAME, FILTER_BY_CREATION, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING, GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_BY_NAME, GET_VIDEOGAME_DETAIL} from '../actions/actions.js'
 
 
 const initialState = {
@@ -121,6 +121,11 @@ const rootReducer = (state = initialState, action) => {
 					videogames: state.videogames
 				}
 			}
+		case CLEAN_SEARCH: {
+			return {
+				videogames: []
+			}
+		}
 		default:
 			return{...state}
 	}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import './style/VideogameCreate.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { createVideogame, getGenres } from "../redux/actions/actions";
 import './style/Form.css'

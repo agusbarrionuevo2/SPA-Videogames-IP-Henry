@@ -2,10 +2,9 @@ import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { VideogameCard } from "./VideogameCard";
-import { NavBar } from "./NavBar";
 import { SearchBar } from "./SearchBar";
 import {Paginate} from './Paginate'
-import {filterByCreation, filterByGenre, orderByName, orderByRating, getGenres, getVideogames } from "../redux/actions/actions"
+import {filterByCreation, filterByGenre, orderByName, orderByRating, getGenres, getVideogames, cleanSearch } from "../redux/actions/actions"
 import './style/Home.css'
 
 export default function Home (){
@@ -16,9 +15,8 @@ export default function Home (){
 	const videogames = useSelector(state => state.videogames)
 
 	const [alfabetical, setAlfabetical] = useState('')
-	
 	const [rating, setRating] = useState('')
-//Paginado
+
 	const [currentPage, setCurrentPage ] = useState(1);
 	const videogamesPerPage = 15
 	const ultimo = currentPage * videogamesPerPage
@@ -58,7 +56,9 @@ export default function Home (){
 	}
 
 	const cleanFilters = () => {
+		dispatch(cleanSearch())
 		dispatch(getVideogames())
+		dispatch(getGenres())
 	}
 
 	return (
@@ -102,6 +102,7 @@ export default function Home (){
 						name={v.name}
 						genre={v.genre || (v.Genres && v.Genres.map(g => g.name))}
 						image= {v.image}
+						rating= {v.rating}
 					/>)}
 				</div>
 					<div>
@@ -116,3 +117,9 @@ export default function Home (){
 			</div>
 	)
 }
+
+
+
+
+
+//pokemon.types.map(t => t.name + ', ')
