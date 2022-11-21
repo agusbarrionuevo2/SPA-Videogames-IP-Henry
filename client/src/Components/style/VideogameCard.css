@@ -22,15 +22,18 @@
 
 
 .card-header {
-	font-size: 1.5rem;
+	font-size: 1.25rem;
+	padding: 1rem;
 }
 
 .card-body {
 	font-size: 1rem;
+	padding: 1rem;
 }
 
-.card-footer {
-	margin-top: 1rem;
+.card-rating {
+	font-size: 1rem;
+	padding: 1rem;
 }
 
 img{

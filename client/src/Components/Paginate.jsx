@@ -21,18 +21,22 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 
 	return(
 		<div className="paginate-container">
-			<button onClick={() => handlePrev()} disabled={allVideogames < 15}>prev</button>
-				<div className='pages'>
+			<div className='prev-next'>
+				<button className="next-prev-btn" onClick={() => handlePrev()} disabled={allVideogames < 15}>prev</button>
+			</div>
+				<div className="pages">
 					{allVideogames < 15 ? 
 					<div key='pagination'> {setPagination(1)}</div> : 
 					pageNumber && pageNumber.map(n =>(
 						<div className='page'>
-							<button  key={n} onClick={(event) => setPagination(n)} >{n}</button>
+							<button className="page-btn"  key={n} onClick={(event) => setPagination(n)} >{n}</button>
 						</div>
 					))
 					}
 				</div>
-			<button onClick={() => handleNext()} disabled={allVideogames < 15}>next</button>
+				<div className='prev-next'>
+					<button className="next-prev-btn" onClick={() => handleNext()} disabled={allVideogames < 15}>next</button>
+				</div>
 		</div>
 	)
 }

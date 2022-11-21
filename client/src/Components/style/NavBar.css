@@ -4,6 +4,7 @@
 	text-decoration: none;
 }
 .navbar-container {
+	z-index: 1;
 	display: flex;
 	background: rgba(61,48,48,0.5);
 	-webkit-backdrop-filter: blur(10px);

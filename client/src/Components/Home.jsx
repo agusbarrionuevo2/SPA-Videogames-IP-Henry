@@ -64,8 +64,11 @@ export default function Home (){
 	return (
 			<div className="home-container">
 				<h1>Home</h1>
-				<SearchBar/>
+				<div className="search-bar">
+					<SearchBar/>
+				</div>
 					<div className="filters-container">
+						<div className='filter'>
 							<label>Filter by Name: </label>
 								<select key='selectFilterName' name="FilterByName" onChange={(event) => handlerName(event)}>
 									<option key='ALLBYNAME'defaultValue='ALL'></option>
@@ -74,6 +77,8 @@ export default function Home (){
 										<option key='Z-A' value='Z-A'>Z-A</option>
 									</optgroup>
 								</select>
+						</div>
+						<div className='filter'>
 							<label> Rating: </label>
 								<select  key='selectFilterRating' name="FilterByRating" onChange={(event) => handlerRating(event)}>
 									<option key='ALLRATING' defaultValue='ALL'></option>
@@ -82,18 +87,25 @@ export default function Home (){
 										<option key='5-0' value='5-0'>5-0</option>
 									</optgroup>
 								</select>
+						</div>
+						<div className='filter'>
 							<label>Genre: </label>
-								<select  key='selectFilterGenre' onChange={(event) => handlerGenre(event)}>
+								<select key='selectFilterGenre' onChange={(event) => handlerGenre(event)}>
 									<option key='ALLGENRE' defaultValue='ALL'></option>
 									{ genres && genres.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))}
 								</select>
+						</div>
+						<div className='filter'>
 							<label>Created At:</label>
-								<select  key='selectFilterCreation' onChange={(event) => handleCreatedAt(event)}>
+								<select key='selectFilterCreation' onChange={(event) => handleCreatedAt(event)}>
 									<option key='ALLCREATION' defaultValue='ALL'></option>
 									<option key='db' value='db'>Database</option>
 									<option key='api' value='api'>API</option>
 								</select>
-							 <button onClick={() => cleanFilters()}>Clear Filters</button> 
+						</div>
+						<div className='filter'>
+								<button className='clear-btn' onClick={() => cleanFilters()}>Clear Filters</button> 
+						</div>
 					</div>
 				<div className="card-layout">
 					{games.map(v =>  <VideogameCard

@@ -110,33 +110,40 @@ export default function VideogameCreate(){
 	return (
 		<div>
 			<h1>Create Your Own Videogame</h1>
-				<form onSubmit={(event) => handlerSubmit(event)}>
-					<label>Name: </label>
-						<input className='text-input' type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)} placeholder='Be creative!...'></input>
-						{error.name && (<p>{error.name}</p>)}
-					<hr/>
-					<label>Description: </label>
-						<textarea  className='text-input' name='description' value={input.description} onChange={(event) => handlerInput(event)} placeholder='How would you describe this game?'></textarea>
-						{error.description && (<p>{error.description}</p>)}
-					<hr/>
-					<label>Release Date: </label>
-						<input className="releaseDate" type='date' name='release_date' max='2022-11-30' value={input.release_date} onChange={(event) => handlerInput(event)}></input>
-					<hr/>
-					<label>Rating: </label>
-						<input  className='rating' type='number' min='1' max='5' step='0.1' name='rating' value={input.rating} onChange={(event) => handlerInput(event)}></input>
-						{error.rating && (<p>{error.rating}</p>)}
-					<hr/>
-					<label>Genre: </label>
-						<select  name='genre' value={input.genres} onChange={(event) => handleSelectGenres(event)}>
-							<option>Select Genre</option>
-							{
-								genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
-							}
-						</select>
-						<ul><li key='selectedGenres'>Selected genres: {input.genres.map(g => g + ',')}</li></ul>
-					<hr/>
+			<div className="form-container">
+				<form className="form" onSubmit={(event) => handlerSubmit(event)}>
+					<div className="form-item" id="name">
+						<label>Name: </label>
+							<input className='text-input' type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)} placeholder='Be creative!...'></input>
+							{error.name && (<p>{error.name}</p>)}
+					</div>
+					<div className="form-item" id="descr">
+						<label>Description: </label>
+							<textarea  className='text-input' name='description' value={input.description} onChange={(event) => handlerInput(event)} placeholder='How would you describe this game?'></textarea>
+							{error.description && (<p>{error.description}</p>)}
+					</div>
+					<div className="form-item" id="date">
+							<label>Release Date: </label>
+							<input className="releaseDate" type='date' name='release_date' max='2022-11-30' value={input.release_date} onChange={(event) => handlerInput(event)}></input>
+					</div>
+					<div className="form-item" id="rat">
+						<label>Rating: </label>
+							<input  className='rating' type='number' min='1' max='5' step='0.1' name='rating' value={input.rating} onChange={(event) => handlerInput(event)}></input>
+							{error.rating && (<p>{error.rating}</p>)}
+					</div>
+					<div className="form-item" id="gen">
+						<label>Genre: </label>
+							<select  name='genre' value={input.genres} onChange={(event) => handleSelectGenres(event)}>
+								<option>Select Genre</option>
+								{
+									genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
+								}
+							</select>
+							<ul><li key='selectedGenres'>Selected genres: {input.genres.map(g => g + ',')}</li></ul>
+					</div>
+					<div className="form-item" id="plat">
 					<label>Platforms: </label>
-						<div className='platformsSelector'>
+						<div className='platform-selector'>
 							{platforms.map(p => (
 								<div className="select">
 									<input
@@ -149,9 +156,12 @@ export default function VideogameCreate(){
 								</div>
 									))}
 						</div>
-					<hr/>
-					<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create</button>
+					</div>
+					<div className="form-submit">
+						<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create</button>
+					</div>
 				</form>
+			</div>
 		</div>
 	)
 }

@@ -1,11 +1,44 @@
-/* .home-container {
-
-}
-
 .filters-container {
-
-} */
-
-.card-layout {
-  
+	display: flex;
+	justify-content: center;
 }
+.filter {
+	display: inline-block;
+	padding-left: 3.25rem;
+	padding-right: 3.25rem;
+	align-items: center;
+	justify-content: center;
+	margin-top: 2rem;
+}
+.card-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding-bottom: 1rem;
+}
+
+label {
+	color: white;
+}
+
+select {
+	border-radius: 12px;
+	background: rgba(255,255,255,0.5);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255,255,255,0.25);
+}
+
+.clear-btn {
+	background-color: black;
+	width: 5rem;
+	border-radius: 12px;
+	color: white;
+}
+
+.clear-btn:hover{
+	background-color: white;
+	border-radius: 12px;
+	color: black;
+}
+
