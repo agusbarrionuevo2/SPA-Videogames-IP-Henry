@@ -4,6 +4,9 @@
 	text-decoration: none;
 }
 .navbar-container {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
 	z-index: 1;
 	display: flex;
 	background: rgba(61,48,48,0.5);

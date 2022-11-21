@@ -18,7 +18,7 @@ export default function VideogameDetail(props){
 	return(
 		<div>
 			<h1>Detalle</h1>
-			<img src={videogameDetail.image} alt='img'/>
+			<img src={videogameDetail.image ? videogameDetail.image : videogameDetail.image = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'} alt='img'/>
 			<h1>Name: {videogameDetail.name}</h1>
 			<p key='description'>Description: {videogameDetail.description}</p>
 			<p key='rating'>Rating: {videogameDetail.rating}</p>

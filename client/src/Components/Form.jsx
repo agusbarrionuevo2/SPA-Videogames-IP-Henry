@@ -14,7 +14,7 @@ export const validations = (input) => {
 
 	if(!input.description){
 		error.description = 'Description is required'
-	} else if(!/^[a-zA-Z0-9 ,.]{0,150}$/.test(input.description)){
+	} else if(!/^[a-zA-Z0-9 ,.]{25,150}$/.test(input.description)){
 		error.description = 'Description invalid'
 	}
 
@@ -111,15 +111,18 @@ export default function VideogameCreate(){
 		<div>
 			<h1>Create Your Own Videogame</h1>
 			<div className="form-container">
-				<form className="form" onSubmit={(event) => handlerSubmit(event)}>
-					<div className="form-item" id="name">
+			<form className="form" onSubmit={(event) => handlerSubmit(event)}>
+				<div className="form-item">
+					<p>Create Your Own Videogame!</p>
+				</div>
+					<div className="form-item">
 						<label>Name: </label>
-							<input className='text-input' type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)} placeholder='Be creative!...'></input>
-							{error.name && (<p>{error.name}</p>)}
+							<input id="name" className='text-input' type='text' name='name' value={input.name} onChange={(event) => handlerInput(event)} placeholder='Be creative!...'></input>
+							{error.name && (<p className="error">{error.name}</p>)}
 					</div>
-					<div className="form-item" id="descr">
 						<label>Description: </label>
-							<textarea  className='text-input' name='description' value={input.description} onChange={(event) => handlerInput(event)} placeholder='How would you describe this game?'></textarea>
+					<div className="form-item">
+							<textarea  id="descr" name='description' value={input.description} onChange={(event) => handlerInput(event)} placeholder='How would you describe this game?'></textarea>
 							{error.description && (<p>{error.description}</p>)}
 					</div>
 					<div className="form-item" id="date">
@@ -139,7 +142,9 @@ export default function VideogameCreate(){
 									genreDb && genreDb.map(g => (<option key={g.id} value={g.name}>{g.name}</option>))
 								}
 							</select>
-							<ul><li key='selectedGenres'>Selected genres: {input.genres.map(g => g + ',')}</li></ul>
+					</div>
+					<div className="form-item-selected">
+								<ul><li key='selectedGenres'>Selected genres: {input.genres.map(g => g + ',')}</li></ul>
 					</div>
 					<div className="form-item" id="plat">
 					<label>Platforms: </label>
@@ -157,8 +162,8 @@ export default function VideogameCreate(){
 									))}
 						</div>
 					</div>
-					<div className="form-submit">
-						<button type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create</button>
+					<div className="form-item">
+						<button className="submit-btn" type="submit" disabled={!input.name || !input.description || !input.platforms.length } >Create</button>
 					</div>
 				</form>
 			</div>
