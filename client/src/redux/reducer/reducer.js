@@ -43,7 +43,14 @@ const rootReducer = (state = initialState, action) => {
 		case FILTER_BY_GENRE:
 			if(action.payload){
 				const filter = state.allVideogames.filter(v => (v.genre && v.genre.includes(action.payload)) || (v.Genres && v.Genres.map(g => g.name).includes(action.payload)))
-				return {
+				if(!filter.length) {
+					alert('No videogames found for this genre! refreshing...')
+					return {
+						...state,
+						videogames: state.allVideogames
+					}
+				}
+				 return {
 					...state,
 					videogames: filter
 				}
@@ -67,7 +74,6 @@ const rootReducer = (state = initialState, action) => {
 					videogames: byName
 				}
 			} else {
-				console.log(state.videogames)
 				return {
 					...state,
 					videogames: state.videogames

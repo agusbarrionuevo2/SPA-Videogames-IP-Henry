@@ -15,6 +15,11 @@
 	justify-content: center;
 	align-items: center;
 	padding: 1rem;
+	transition: all .5s ease;
+}
+
+.detail-container:hover{
+	transform: translate3D(0,-1px,0) scale(1.03);
 }
 
 .cont-cont {
@@ -40,6 +45,11 @@
 	border-radius: 12px;
 	width: fit-content;
 	height: fit-content;
+	transition: all .5s ease;
+}
+
+.img-container:hover{
+	transform: translate3D(0,-1px,0) scale(1.03);
 }
 
 .game-title{

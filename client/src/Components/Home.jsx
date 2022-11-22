@@ -60,11 +60,6 @@ export default function Home (){
 	const handleClick = () => {
 		history.go(0);
 	}
-	// const cleanFilters = () => {
-	// 	dispatch(cleanSearch())
-	// 	dispatch(getVideogames())
-	// 	dispatch(getGenres())
-	// }
 
 	return (
 			<div className="home-container">

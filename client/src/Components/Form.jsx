@@ -22,9 +22,9 @@ export const validations = (input) => {
 		error.rating = 'Rating is required'
 	} else if(!/^[1-5]\d*(\.\d)?$/.test(input.rating)) error.rating = 'Rating invalid'
 
-	if(!input.platforms) {
-		error.platforms = 'Select a platform!'
-	}
+	// if(!input.platforms) {
+	// 	error.platforms = 'Select a platform!'
+	// }
 	return error;
 }
 
@@ -150,7 +150,7 @@ export default function VideogameCreate(){
 					</div>
 					<label className="form-item">Platforms: </label>
 					<div className="form-item" id="plat">
-							{error.platforms && (<p className="error">{error.platforms}</p>)}
+							{/* {error.platforms && (<p className="error">{error.platforms}</p>)} */}
 						<div className='platform-selector'>
 							{platforms.map(p => (
 								<div className="select">

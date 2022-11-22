@@ -4,6 +4,10 @@
 	align-items: center;
 	padding: 5rem;
 }
+
+/* .container-form:hover{
+	transform: translate3D(0,-1px,0) scale(1.03);
+} */
 .form-container {
 	background: rgba(61,48,48,0.5);
 	-webkit-backdrop-filter: blur(10px);
@@ -58,6 +62,10 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	transition: all .5s ease;
+}
+.form:hover{
+	transform: translate3D(0,-1px,0) scale(1.03);
 }
 
 .form-item {

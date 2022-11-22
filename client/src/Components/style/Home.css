@@ -10,6 +10,11 @@
 	width: fit-content;
 	height: fit-content;
 	padding: .5rem;
+	transition: all .5s ease;
+}
+.filters-container:hover{
+	transform: translate3D(0,-1px,0) scale(1.03);
+
 }
 .f-container {
 	padding: 1rem;

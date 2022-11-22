@@ -27,6 +27,11 @@ li {
 	width: fit-content;
 	padding-right: 4rem;
 	padding-left: 4rem;
+	transition: all .5s ease;
+}
+
+li:hover{
+	transform: translate3D(0,-1px,0) scale(1.03);
 }
 
 .btn {

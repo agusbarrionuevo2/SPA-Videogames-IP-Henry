@@ -13,8 +13,14 @@
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(61,48,48,0.25);
-	margin-top: 20%;
+	margin-top: 13.5rem;
 	color: antiquewhite;
 	border-radius: 20px;
-	width: 35rem
+	width: fit-content;
+	transition: all .5s ease;
+	padding: 1rem;
+}
+
+.title:hover{
+	transform: translate3D(0,-1px,0) scale(1.03);
 }

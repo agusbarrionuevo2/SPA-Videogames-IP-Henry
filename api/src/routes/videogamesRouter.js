@@ -32,7 +32,7 @@ videogamesRouter.post('/', async (req, res) => {
 		const exists = await Videogame.findOne({
 			where: { name }
 		})
-		if(exists) return res.status(400).send('A game with that name already exists')
+		if(exists) return res.status(404).send('A game with that name already exists')
 		const newVideogame = await Videogame.create({name, description, platforms, rating, release_date})
 
 		const genreDb = await Genre.findAll({
