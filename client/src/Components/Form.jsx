@@ -21,8 +21,11 @@ export const validations = (input) => {
 	if(!input.rating){
 		error.rating = 'Rating is required'
 	} else if(!/^[1-5]\d*(\.\d)?$/.test(input.rating)) error.rating = 'Rating invalid'
-	return error;
 
+	if(!input.platforms) {
+		error.platforms = 'Select a platform!'
+	}
+	return error;
 }
 
 
@@ -108,12 +111,11 @@ export default function VideogameCreate(){
 
 
 	return (
-		<div>
-			<h1>Create Your Own Videogame</h1>
+		<div className="container-form">
 			<div className="form-container">
 			<form className="form" onSubmit={(event) => handlerSubmit(event)}>
 				<div className="form-item">
-					<p>Create Your Own Videogame!</p>
+					<p className="form-title">Create Your Own Videogame!</p>
 				</div>
 					<div className="form-item">
 						<label>Name: </label>
@@ -123,7 +125,7 @@ export default function VideogameCreate(){
 						<label>Description: </label>
 					<div className="form-item">
 							<textarea  id="descr" name='description' value={input.description} onChange={(event) => handlerInput(event)} placeholder='How would you describe this game?'></textarea>
-							{error.description && (<p>{error.description}</p>)}
+							{error.description && (<p className="error" >{error.description}</p>)}
 					</div>
 					<div className="form-item" id="date">
 							<label>Release Date: </label>
@@ -132,7 +134,7 @@ export default function VideogameCreate(){
 					<div className="form-item" id="rat">
 						<label>Rating: </label>
 							<input  className='rating' type='number' min='1' max='5' step='0.1' name='rating' value={input.rating} onChange={(event) => handlerInput(event)}></input>
-							{error.rating && (<p>{error.rating}</p>)}
+							{error.rating && (<p className="error">{error.rating}</p>)}
 					</div>
 					<div className="form-item" id="gen">
 						<label>Genre: </label>
@@ -146,8 +148,9 @@ export default function VideogameCreate(){
 					<div className="form-item-selected">
 								<ul><li key='selectedGenres'>Selected genres: {input.genres.map(g => g + ',')}</li></ul>
 					</div>
+					<label className="form-item">Platforms: </label>
 					<div className="form-item" id="plat">
-					<label>Platforms: </label>
+							{error.platforms && (<p className="error">{error.platforms}</p>)}
 						<div className='platform-selector'>
 							{platforms.map(p => (
 								<div className="select">
@@ -171,12 +174,3 @@ export default function VideogameCreate(){
 	)
 }
 
-
-{/* <select name='platforms' value={input.platforms} onChange={(event) => handleSelectPlatforms(event)} >
-							<option key='allPlatforms'>Select Platforms</option>
-							{
-								platforms && platforms.map((p, index) => (<option key={index} value={p}>{p}</option>))
-							}
-						</select> */}
-
-						{/* <ul><li key='selectedPlatforms'>{input.platforms.map(p =>p + ',')}</li></ul> */}

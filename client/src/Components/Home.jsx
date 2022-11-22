@@ -1,15 +1,17 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { VideogameCard } from "./VideogameCard";
 import { SearchBar } from "./SearchBar";
 import {Paginate} from './Paginate'
 import {filterByCreation, filterByGenre, orderByName, orderByRating, getGenres, getVideogames, cleanSearch } from "../redux/actions/actions"
 import './style/Home.css'
+import { useHistory } from "react-router-dom";
 
 export default function Home (){
 	
 	const dispatch = useDispatch()
+
+	const history = useHistory()
 	
 	const genres = useSelector(state => state.genres)
 	const videogames = useSelector(state => state.videogames)
@@ -28,9 +30,9 @@ export default function Home (){
 	}
 
 	useEffect(() =>{
-		dispatch(getVideogames())
+		if(!videogames.length)dispatch(getVideogames())
 		dispatch(getGenres())
-	 },[dispatch])
+	 },[dispatch, videogames.length])
 
 //FILTROS
 	const handlerRating = (event) => {
@@ -55,11 +57,14 @@ export default function Home (){
 		dispatch(filterByCreation(event.target.value))
 	}
 
-	const cleanFilters = () => {
-		dispatch(cleanSearch())
-		dispatch(getVideogames())
-		dispatch(getGenres())
+	const handleClick = () => {
+		history.go(0);
 	}
+	// const cleanFilters = () => {
+	// 	dispatch(cleanSearch())
+	// 	dispatch(getVideogames())
+	// 	dispatch(getGenres())
+	// }
 
 	return (
 			<div className="home-container">
@@ -67,25 +72,22 @@ export default function Home (){
 				<div className="search-bar">
 					<SearchBar/>
 				</div>
+				<div className="f-container">
 					<div className="filters-container">
 						<div className='filter'>
 							<label>Filter by Name: </label>
 								<select key='selectFilterName' name="FilterByName" onChange={(event) => handlerName(event)}>
-									<option key='ALLBYNAME'defaultValue='ALL'></option>
-									<optgroup key='nameLabel' label="By Name">
+										<option key='ALLBYNAME'defaultValue='ALL'></option>
 										<option key='A-Z' value='A-Z'>A-Z</option>
 										<option key='Z-A' value='Z-A'>Z-A</option>
-									</optgroup>
 								</select>
 						</div>
 						<div className='filter'>
 							<label> Rating: </label>
 								<select  key='selectFilterRating' name="FilterByRating" onChange={(event) => handlerRating(event)}>
-									<option key='ALLRATING' defaultValue='ALL'></option>
-									<optgroup key='ratingLabel' label="By Rating">
+										<option key='ALLRATING' defaultValue='ALL'></option>
 										<option key='0-5' value='0-5'>0-5</option>
 										<option key='5-0' value='5-0'>5-0</option>
-									</optgroup>
 								</select>
 						</div>
 						<div className='filter'>
@@ -104,16 +106,17 @@ export default function Home (){
 								</select>
 						</div>
 						<div className='filter'>
-								<button className='clear-btn' onClick={() => cleanFilters()}>Clear Filters</button> 
+								<button className='clear-btn' onClick={() => handleClick()}>Reload Videogames</button> 
 						</div>
 					</div>
+				</div>
 				<div className="card-layout">
 					{games.map(v =>  <VideogameCard
 						key={v.id}
 						id={v.id}
 						name={v.name}
 						genre={v.genre || (v.Genres && v.Genres.map(g => g.name))}
-						image= {v.image}
+						image= {v.image ? v.image : v.image = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'}
 						rating= {v.rating}
 					/>)}
 				</div>

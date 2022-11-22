@@ -42,16 +42,7 @@ const rootReducer = (state = initialState, action) => {
 			}
 		case FILTER_BY_GENRE:
 			if(action.payload){
-				const filter = state.allVideogames.filter(function(v){
-					if(v.genre){
-						let coincidence = v.genre.includes(action.payload)
-						return coincidence
-					}
-					else if(v.Genre) {
-						let coincidence = v.Genre && v.Genre.includes(action.payload)
-						return coincidence
-					} 
-				}) 
+				const filter = state.allVideogames.filter(v => (v.genre && v.genre.includes(action.payload)) || (v.Genres && v.Genres.map(g => g.name).includes(action.payload)))
 				return {
 					...state,
 					videogames: filter

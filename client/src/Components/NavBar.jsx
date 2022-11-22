@@ -7,17 +7,17 @@ export function NavBar () {
 			<ul>
 				<li  className='nav-link'>
 					<NavLink  to='/'>
-						<p className="landing-btn">Landing</p>
+						<p className="btn">Landing</p>
 					</NavLink>
 				</li>
 				<li  className='nav-link'>
 					<NavLink  to='/home'>
-						<p className="home-btn">Home</p>
+						<p className="btn">Home</p>
 					</NavLink>
 				</li>
 				<li  className='nav-link'>
 					<NavLink  to='/create'>
-						<p className="form-btn">Create a Videogame!</p>
+						<p className="btn">Create a Videogame!</p>
 					</NavLink>
 				</li>
 			</ul>

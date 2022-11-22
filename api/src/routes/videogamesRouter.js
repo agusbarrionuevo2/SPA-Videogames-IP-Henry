@@ -3,7 +3,7 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const videogamesRouter = Router();
 const {getVideogameDetail, getAllVideogames} = require('./Controllers/Controllers')
-const {Genre, Videogame, Op} = require('../db')
+const {Genre, Videogame} = require('../db')
 
 videogamesRouter.get('/', async (req, res)=> {
 	const { name } = req.query
@@ -11,7 +11,7 @@ videogamesRouter.get('/', async (req, res)=> {
 		const videogames = await getAllVideogames(name)
 		return res.status(200).send(videogames)
 	} catch (error) {
-		return res.status(404).send(error.message)
+		return res.status(404).send(`No videogames found with the name ${name}`)
 	}
 })
 

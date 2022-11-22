@@ -3,7 +3,8 @@ const {
 	API_KEY
   } = process.env;
 const axios = require('axios');
-const {Genre, Videogame, Op} = require('../../db')
+const {Genre, Videogame} = require('../../db')
+const { Op } = require('sequelize')
 
 
 
@@ -43,7 +44,6 @@ async function getVideogames (name) {
 							genre: v.genres.map(g => g.name),
 							rating: v.rating
 						})
-						result.push(v)
 					 }
 				});
 		if(!result.length) throw new Error(`No matches were found with the name: ${name}`)
@@ -73,7 +73,7 @@ async function getVideogamesFromDb(name){
 	if(name){
 		let videogames = Videogame.findAll({
 			where: {
-				name: name
+				name: {[Op.substring] : name}
 			},
 				include: [
 					{
@@ -107,9 +107,9 @@ async function getVideogamesFromDb(name){
 //trae todos los videojuegos, tanto de la db como de la api. y tambien lo hace por nombre
 async function getAllVideogames(name){
 	if(name){
-		const dbByName = await getVideogamesFromDb(name)
 		const apiByName = await getVideogames(name)
-		return apiByName.concat(dbByName)
+		const dbByName = await getVideogamesFromDb(name)
+		return apiByName.concat(dbByName).slice(0,15)
 	}
 	const dB = await getVideogamesFromDb()
 	const api = await getVideogames() 
@@ -130,7 +130,6 @@ async function getVideogameDetail (id) {
 				}
 			]
 		})
-		console.log(videogame)
 		return videogame
 	}
 	const videogame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)

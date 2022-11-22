@@ -29,7 +29,7 @@ export function Paginate({allVideogames, videogamesPerPage, setPagination, curre
 					<div key='pagination'> {setPagination(1)}</div> : 
 					pageNumber && pageNumber.map(n =>(
 						<div className='page'>
-							<button className="page-btn"  key={n} onClick={(event) => setPagination(n)} >{n}</button>
+							<button className={'page-number' + (n === currentPage ? 'active' : '')}  key={n} onClick={(event) => setPagination(n)} >{n}</button>
 						</div>
 					))
 					}

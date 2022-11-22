@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
+      defaultValue: 'no genres'
     }
   }, {timestamps: false });
 };

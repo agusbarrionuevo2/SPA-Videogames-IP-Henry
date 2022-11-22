@@ -11,7 +11,7 @@
 	margin-bottom: 3rem;
 }
 
-.page-btn {
+.page-number {
 	width: 2rem;
 	border-radius: 12px;
 	background: rgba(255,255,255,0.5);
@@ -19,7 +19,17 @@
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255,255,255,0.25);
 }
-.page-btn:hover {
+
+.page-numberactive {
+	width: 2.5rem;
+	border-radius: 12px;
+	background: rgba(240, 61, 61, 0.5);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255,255,255,0.25);
+}
+
+.page-number:hover {
 	background-color: white;
 }
 
